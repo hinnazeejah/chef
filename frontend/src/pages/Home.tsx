@@ -12,6 +12,7 @@ const Home: React.FC = () => {
   const [prices, setPrices] = useState<Price[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showResults, setShowResults] = useState(false);
 
   const handleSubmit = async (ingredients: string[], preferences: string[]) => {
     setIsLoading(true);
@@ -27,6 +28,7 @@ const Home: React.FC = () => {
         params: { ingredients }
       });
       setPrices(pricesResponse.data);
+      setShowResults(true);
     } catch (err) {
       setError('Failed to fetch data. Please try again.');
     } finally {
@@ -35,8 +37,10 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <IngredientForm onSubmit={handleSubmit} />
+    <div className="space-y-8 max-w-6xl mx-auto">
+      <div className="max-w-2xl mx-auto">
+        <IngredientForm onSubmit={handleSubmit} />
+      </div>
       {error && (
         <div className="bg-red-100 text-red-700 p-4 rounded-md">
           {error}
@@ -47,21 +51,23 @@ const Home: React.FC = () => {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
         </div>
       ) : (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recipes.map(recipe => (
-              <RecipeCard
-                key={recipe.id}
-                recipe={recipe}
-                onViewRecipe={(id) => console.log('View recipe:', id)}
-              />
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <StoreList stores={stores} />
-            <PriceTable prices={prices} isLoading={isLoading} />
-          </div>
-        </>
+        showResults && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {recipes.map(recipe => (
+                <RecipeCard
+                  key={recipe.id}
+                  recipe={recipe}
+                  onViewRecipe={(id) => console.log('View recipe:', id)}
+                />
+              ))}
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <StoreList stores={stores} />
+              <PriceTable prices={prices} isLoading={isLoading} />
+            </div>
+          </>
+        )
       )}
     </div>
   );

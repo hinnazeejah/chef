@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AutocompleteInput from './AutocompleteInput';
 
 interface DietaryPreference {
   id: string;
@@ -6,6 +7,7 @@ interface DietaryPreference {
 }
 
 const dietaryPreferences: DietaryPreference[] = [
+  { id: 'none', label: 'None' },
   { id: 'vegetarian', label: 'Vegetarian' },
   { id: 'vegan', label: 'Vegan' },
   { id: 'gluten-free', label: 'Gluten-Free' },
@@ -21,11 +23,18 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
 
   const togglePreference = (preferenceId: string) => {
-    setSelectedPreferences(prev => 
-      prev.includes(preferenceId)
-        ? prev.filter(id => id !== preferenceId)
-        : [...prev, preferenceId]
-    );
+    if (preferenceId === 'none') {
+      setSelectedPreferences([]);
+      return;
+    }
+    
+    setSelectedPreferences(prev => {
+      if (prev.includes(preferenceId)) {
+        return prev.filter(id => id !== preferenceId);
+      } else {
+        return [...prev.filter(id => id !== 'none'), preferenceId];
+      }
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -35,49 +44,49 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Ingredients (comma-separated)
-        </label>
-        <input
-          type="text"
-          value={ingredients}
-          onChange={(e) => setIngredients(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-          placeholder="e.g. chicken, rice, tomatoes"
-        />
-      </div>
-      
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Dietary Preferences
-        </label>
-        <div className="flex flex-wrap gap-2">
-          {dietaryPreferences.map(preference => (
-            <button
-              key={preference.id}
-              type="button"
-              onClick={() => togglePreference(preference.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                selectedPreferences.includes(preference.id)
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {preference.label}
-            </button>
-          ))}
+    <div className="bg-food-cream rounded-2xl p-6 shadow-lg">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label className="block text-food-brown font-medium mb-2">
+            What ingredients do you have?
+          </label>
+          <AutocompleteInput
+            value={ingredients}
+            onChange={setIngredients}
+            placeholder="e.g. ramen, eggs, cheese"
+          />
         </div>
-      </div>
 
-      <button
-        type="submit"
-        className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        Find Recipes
-      </button>
-    </form>
+        <div>
+          <label className="block text-food-brown font-medium mb-3">
+            Dietary Preferences
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {dietaryPreferences.map(preference => (
+              <button
+                key={preference.id}
+                type="button"
+                onClick={() => togglePreference(preference.id)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                  selectedPreferences.includes(preference.id)
+                    ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
+                    : 'bg-white text-food-brown border border-food-orange/20 hover:border-food-orange'
+                }`}
+              >
+                {preference.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full py-3 px-4 bg-gradient-to-r from-food-orange to-food-brown text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
+        >
+          Find Budget-Friendly Recipes
+        </button>
+      </form>
+    </div>
   );
 };
 

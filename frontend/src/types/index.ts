@@ -4,6 +4,8 @@ export interface Recipe {
   image: string;
   prepTime: string;
   description: string;
+  dietaryTags?: string[];
+  estimatedCost?: number;
 }
 
 export interface Store {
