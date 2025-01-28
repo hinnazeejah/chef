@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
               alt="Chef Icon" 
               className="w-8 h-8 object-contain"
             />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <span className="text-2xl font-bold text-primary">
               Chef Assistant
             </span>
           </Link>

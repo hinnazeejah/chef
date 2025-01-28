@@ -8,9 +8,9 @@ import RecipeResults from './pages/RecipeResults';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white">
         <Navbar />
-        <div className="container mx-auto px-4 py-8 max-w-7xl">
+        <div className="container mx-auto px-4 pt-24 pb-8 max-w-7xl">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recipe-results" element={<RecipeResults />} />

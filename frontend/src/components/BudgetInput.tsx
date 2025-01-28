@@ -24,14 +24,16 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ value, onChange }) => {
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
-        <label className="block text-food-brown font-medium">Enter Your Budget</label>
+        <label className="block text-dark font-semibold mb-2 text-lg">
+          Enter Your Budget
+        </label>
         <Tooltip content="Enter your budget to filter recipes that fit your needs">
           <QuestionMarkCircleIcon className="w-5 h-5 text-food-sage" />
         </Tooltip>
       </div>
       
       <div className="relative">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-food-brown/60">$</span>
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-dark">$</span>
         <input
           type="number"
           min="0"

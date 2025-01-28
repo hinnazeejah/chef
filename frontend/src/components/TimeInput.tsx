@@ -15,6 +15,7 @@ const timeOptions: TimeOption[] = [
   { minutes: 60, label: '1 hour', description: 'chill' },
   { minutes: 90, label: '1.5 hours', description: 'weekend vibes' },
   { minutes: 120, label: '2 hours', description: 'meal prep' },
+  { minutes: 240, label: 'All day', description: 'no rush' },
 ];
 
 interface TimeInputProps {
@@ -26,7 +27,9 @@ const TimeInput: React.FC<TimeInputProps> = ({ selectedTime, onChange }) => {
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
-        <label className="block text-food-brown font-medium">I have...</label>
+        <label className="block text-dark font-semibold mb-2 text-lg">
+          I have...
+        </label>
         <Tooltip content="Filter recipes by your schedule!">
           <ClockIcon className="w-5 h-5 text-food-sage" />
         </Tooltip>
@@ -59,13 +62,7 @@ const TimeInput: React.FC<TimeInputProps> = ({ selectedTime, onChange }) => {
 
 const getGradientClass = (minutes: number): string => {
   const baseClasses = 'hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 ';
-  if (minutes <= 30) {
-    return baseClasses + 'bg-primary text-white hover:bg-primary-light';
-  } else if (minutes <= 60) {
-    return baseClasses + 'bg-food-brown text-white hover:bg-food-brown/90';
-  } else {
-    return baseClasses + 'bg-secondary text-white hover:bg-secondary/90';
-  }
+  return baseClasses + 'bg-primary text-white hover:bg-primary-light shadow-sm';
 };
 
 export default TimeInput; 

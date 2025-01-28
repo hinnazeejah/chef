@@ -10,13 +10,13 @@ interface Appliance {
 }
 
 const appliances: Appliance[] = [
-  { id: 'all', label: 'I have everything', icon: '✨', description: 'All appliances available' },
   { id: 'microwave', label: 'Microwave', icon: '🍔', description: 'Quick meals and reheating' },
   { id: 'blender', label: 'Blender', icon: '🥤', description: 'Smoothies and sauces' },
   { id: 'airfryer', label: 'Air Fryer', icon: '🍟', description: 'Crispy cooking without oil' },
   { id: 'stovetop', label: 'Stovetop Only', icon: '🍳', description: 'Basic cooking setup' },
   { id: 'toaster', label: 'Toaster', icon: '🍞', description: 'Quick breakfast' },
   { id: 'ricecooker', label: 'Rice Cooker', icon: '🍚', description: 'Perfect rice every time' },
+  { id: 'all', label: 'I have everything', icon: '✨', description: 'All appliances available' },
 ];
 
 interface KitchenToolsProps {
@@ -62,7 +62,9 @@ const KitchenTools: React.FC<KitchenToolsProps> = ({ selectedAppliances, onChang
 
   return (
     <div className="space-y-3" ref={containerRef}>
-      <label className="block text-food-brown font-medium">What appliances do you own?</label>
+      <label className="block text-dark font-semibold mb-2 text-lg">
+        What appliances do you own?
+      </label>
       
       <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2">
         {appliances.map((appliance) => {
@@ -78,7 +80,7 @@ const KitchenTools: React.FC<KitchenToolsProps> = ({ selectedAppliances, onChang
                 px-4 py-2 rounded-full text-sm font-medium 
                 transition-all duration-200 flex items-center gap-2
                 ${isSelected 
-                  ? 'bg-gradient-to-r from-food-orange to-yellow-500 text-white shadow-md' 
+                  ? 'bg-primary text-white shadow-md' 
                   : 'bg-gray-100 text-food-brown hover:bg-gray-200'
                 }
                 ${appliance.id === 'all' ? 'col-span-2 md:w-full justify-center' : ''}

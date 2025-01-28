@@ -7,16 +7,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary': '#9B2C2C',         // Deep red
-        'primary-light': '#C53030',   // Lighter red
-        'secondary': '#8B4513',       // Saddle brown
-        'food-brown': '#5C4033',      // Rich brown
-        'food-tan': '#D2B48C',        // Tan
-        'neutral': '#f8fafc',         // Light background
-        'dark': '#2D1810',           // Dark brown text
-        'success': '#2F855A',        // Forest green
-        'warning': '#C05621',        // Burnt orange
-        'error': '#9B2C2C',          // Deep red
+        'primary': '#C21010',         // Deep red
+        'primary-light': '#E64848',   // Lighter red
+        'secondary': '#FFFDE3',       // Light cream
+        'secondary-light': '#CFE8A9', // Sage green
+        'food-brown': '#C21010',      // Deep red (same as primary)
+        'food-brown-light': '#E64848', // Lighter red
+        'neutral': '#FFFFFF',         // Pure white background
+        'dark': '#1F1F1F',           // Darker text for better contrast
+        'success': '#CFE8A9',        // Sage green for success
+        'warning': '#E64848',        // Lighter red for warnings
+        'error': '#C21010',          // Deep red for errors
       },
       animation: {
         'bounce-sm': 'bounce-sm 0.5s ease-in-out',
