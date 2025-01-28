@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import AutocompleteInput from './AutocompleteInput';
 import TimeInput from './TimeInput';
 import KitchenTools from './KitchenTools';
@@ -27,6 +27,33 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
   const [selectedAppliances, setSelectedAppliances] = useState<string[]>([]);
   const [budget, setBudget] = useState<number | ''>('');
+  const [currentStep, setCurrentStep] = useState<number>(0);
+
+  useEffect(() => {
+    let completedSteps = 0;
+    
+    if (ingredients.trim().length > 0) {
+      completedSteps++;
+    }
+    
+    if (selectedAppliances.length > 0) {
+      completedSteps++;
+    }
+    
+    if (selectedTime !== null) {
+      completedSteps++;
+    }
+    
+    if (selectedPreferences.length > 0) {
+      completedSteps++;
+    }
+
+    if (typeof budget === 'number' && budget > 0) {
+      completedSteps++;
+    }
+    
+    setCurrentStep(completedSteps);
+  }, [ingredients, selectedAppliances, selectedTime, selectedPreferences, budget]);
 
   const togglePreference = (preferenceId: string): void => {
     if (preferenceId === 'none') {
@@ -73,8 +100,29 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 animate-fade-in">
-      <form onSubmit={handleSubmit} className="space-y-8">
+    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-100 animate-fade-in relative overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-food-orange/10 to-food-peach/10 rounded-full blur-2xl" />
+      <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-tr from-food-orange/10 to-food-peach/10 rounded-full blur-2xl" />
+      
+      {/* Updated Progress Bar */}
+      <div className="mb-8">
+        <div className="flex justify-between mb-2 text-xs text-food-brown/60">
+          <span className={currentStep >= 1 ? "text-food-orange font-medium" : ""}>Ingredients</span>
+          <span className={currentStep >= 2 ? "text-food-orange font-medium" : ""}>Appliances</span>
+          <span className={currentStep >= 3 ? "text-food-orange font-medium" : ""}>Time</span>
+          <span className={currentStep >= 4 ? "text-food-orange font-medium" : ""}>Preferences</span>
+          <span className={currentStep >= 5 ? "text-food-orange font-medium" : ""}>Budget</span>
+        </div>
+        <div className="relative h-1 bg-food-cream rounded-full">
+          <div 
+            className="absolute left-0 top-0 h-full bg-gradient-to-r from-food-orange to-food-peach rounded-full transition-all duration-500 ease-in-out"
+            style={{ width: `${(currentStep / 5) * 100}%` }}
+          />
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
         <div>
           <label className="block text-dark font-semibold mb-2 text-lg">
             What ingredients do you have?

@@ -69,34 +69,41 @@ const CreateRecipe: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto pt-28 px-6">
+    <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto pt-28 px-4 md:px-6">
       <div className="text-center mb-12 animate-fade-in">
         <h1 className="text-3xl md:text-4xl font-sans font-bold text-food-orange mb-3 drop-shadow-lg tracking-tight">
           Create Your Perfect Recipe
         </h1>
-        <div className="w-24 h-1 bg-food-orange mx-auto rounded-full mb-4 transform hover:scale-110 transition-transform duration-300" />
-        <p className="text-food-brown/80 text-lg font-medium">
-          Tell us what you have, and we'll do the magic
+        <div className="w-20 h-0.5 bg-gradient-to-r from-food-orange/40 via-food-orange to-food-orange/40 mx-auto mb-6" />
+        <p className="text-food-brown/80 text-lg font-medium mb-8">
+          Tell us what you have, and we'll do the magic ✨
         </p>
         
-        {/* Added Features */}
-        <div className="flex justify-center gap-8 mt-8">
-          <div className="flex items-center gap-2 text-food-brown/70">
-            <ClockIcon className="w-5 h-5" />
-            <span>Quick Results</span>
+        <div className="grid grid-cols-3 gap-3 md:gap-6 mt-8 px-2">
+          <div className="bg-white/80 backdrop-blur-sm p-3 md:p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center justify-center mb-2">
+              <ClockIcon className="w-5 h-5 text-food-orange" />
+            </div>
+            <h3 className="font-medium text-food-brown text-xs md:text-sm">Quick Results</h3>
           </div>
-          <div className="flex items-center gap-2 text-food-brown/70">
-            <SparklesIcon className="w-5 h-5" />
-            <span>AI-Powered</span>
+          
+          <div className="bg-white/80 backdrop-blur-sm p-3 md:p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center justify-center mb-2">
+              <SparklesIcon className="w-5 h-5 text-food-orange" />
+            </div>
+            <h3 className="font-medium text-food-brown text-xs md:text-sm">AI-Powered</h3>
           </div>
-          <div className="flex items-center gap-2 text-food-brown/70">
-            <ShoppingCartIcon className="w-5 h-5" />
-            <span>Cost Efficient</span>
+          
+          <div className="bg-white/80 backdrop-blur-sm p-3 md:p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center justify-center mb-2">
+              <ShoppingCartIcon className="w-5 h-5 text-food-orange" />
+            </div>
+            <h3 className="font-medium text-food-brown text-xs md:text-sm">Cost Efficient</h3>
           </div>
         </div>
       </div>
 
-      <div className="relative">
+      <div className="relative max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
         <div className="absolute -top-6 -left-6 w-12 h-12 bg-food-cream rounded-full opacity-50" />
         <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-food-cream rounded-full opacity-50" />
         <IngredientForm onSubmit={handleSubmit} />
