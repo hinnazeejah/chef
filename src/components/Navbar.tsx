@@ -1,26 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BookmarkIcon, HomeIcon } from '@heroicons/react/24/outline';
 import chefIcon from '../assets/icons/stir-fry.png';
 
 const Navbar: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
-    }`}>
+    <nav className="fixed w-full z-50 bg-white shadow-sm">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           <Link 
@@ -40,10 +28,10 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-8">
             <Link
               to="/"
-              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
                 isActive('/') 
-                  ? 'bg-primary text-white shadow-md' 
-                  : 'text-dark hover:bg-primary/10'
+                  ? 'bg-primary text-white shadow-md scale-105' 
+                  : 'text-dark hover:bg-primary/10 hover:scale-105 hover:shadow-md'
               }`}
             >
               <HomeIcon className="w-5 h-5" />
@@ -52,10 +40,10 @@ const Navbar: React.FC = () => {
 
             <Link
               to="/saved-recipes"
-              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
                 isActive('/saved-recipes') 
-                  ? 'bg-primary text-white shadow-md' 
-                  : 'text-dark hover:bg-primary/10'
+                  ? 'bg-primary text-white shadow-md scale-105' 
+                  : 'text-dark hover:bg-primary/10 hover:scale-105 hover:shadow-md'
               }`}
             >
               <BookmarkIcon className="w-5 h-5" />

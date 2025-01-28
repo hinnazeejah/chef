@@ -6,6 +6,7 @@ import StoreList from '../components/StoreList';
 import PriceTable from '../components/PriceTable';
 import IngredientForm from '../components/IngredientForm';
 import { useNavigate } from 'react-router-dom';
+import Hero from '../components/Hero';
 
 const Home: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -95,20 +96,8 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto">
-      <div className="max-w-2xl mx-auto">
-        <IngredientForm onSubmit={handleSubmit} />
-      </div>
-      {error && (
-        <div className="bg-red-100 text-red-700 p-4 rounded-md">
-          {error}
-        </div>
-      )}
-      {isLoading && (
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
-        </div>
-      )}
+    <div>
+      <Hero />
     </div>
   );
 };
