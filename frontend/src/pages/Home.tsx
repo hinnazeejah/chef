@@ -44,7 +44,8 @@ const Home: React.FC = () => {
     ingredients: string[], 
     preferences: string[], 
     time: number,
-    appliances: string[]
+    appliances: string[],
+    budget: number | null
   ) => {
     setIsLoading(true);
     setError('');
