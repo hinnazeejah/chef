@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import AutocompleteInput from './AutocompleteInput';
 import TimeInput from './TimeInput';
+import KitchenTools from './KitchenTools';
 
 interface DietaryPreference {
   id: string;
@@ -16,21 +17,22 @@ const dietaryPreferences: DietaryPreference[] = [
 ];
 
 interface IngredientFormProps {
-  onSubmit: (ingredients: string[], preferences: string[], time: number) => void;
+  onSubmit: (ingredients: string[], preferences: string[], time: number, appliances: string[]) => void;
 }
 
 const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
-  const [ingredients, setIngredients] = useState('');
+  const [ingredients, setIngredients] = useState<string>('');
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
+  const [selectedAppliances, setSelectedAppliances] = useState<string[]>([]);
 
-  const togglePreference = (preferenceId: string) => {
+  const togglePreference = (preferenceId: string): void => {
     if (preferenceId === 'none') {
       setSelectedPreferences([]);
       return;
     }
     
-    setSelectedPreferences(prev => {
+    setSelectedPreferences((prev: string[]) => {
       if (prev.includes(preferenceId)) {
         return prev.filter(id => id !== preferenceId);
       } else {
@@ -39,10 +41,10 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const ingredientList = ingredients.split(',').map(i => i.trim());
-    onSubmit(ingredientList, selectedPreferences, selectedTime || 0);
+    onSubmit(ingredientList, selectedPreferences, selectedTime || 0, selectedAppliances);
   };
 
   return (
@@ -80,6 +82,11 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
             ))}
           </div>
         </div>
+
+        <KitchenTools 
+          selectedAppliances={selectedAppliances}
+          onChange={setSelectedAppliances}
+        />
 
         <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
 

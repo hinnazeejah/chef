@@ -40,7 +40,12 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (ingredients: string[], preferences: string[]) => {
+  const handleSubmit = async (
+    ingredients: string[], 
+    preferences: string[], 
+    time: number,
+    appliances: string[]
+  ) => {
     setIsLoading(true);
     setError('');
     try {
@@ -78,6 +83,7 @@ const Home: React.FC = () => {
           recipes: mockRecipes,
           userIngredients: ingredients,
           preferences: preferences,
+          appliances: appliances,
           userLocation: userLocation
         }
       });
