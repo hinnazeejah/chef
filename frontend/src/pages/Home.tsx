@@ -44,7 +44,8 @@ const Home: React.FC = () => {
     ingredients: string[], 
     preferences: string[], 
     time: number,
-    appliances: string[]
+    appliances: string[],
+    effortLevel: number
   ) => {
     setIsLoading(true);
     setError('');
@@ -84,6 +85,7 @@ const Home: React.FC = () => {
           userIngredients: ingredients,
           preferences: preferences,
           appliances: appliances,
+          effortLevel: effortLevel,
           userLocation: userLocation
         }
       });

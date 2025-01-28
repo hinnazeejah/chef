@@ -47,6 +47,7 @@ const KitchenTools: React.FC<KitchenToolsProps> = ({ selectedAppliances, onChang
           return (
             <button
               key={appliance.id}
+              type="button"
               onClick={() => toggleAppliance(appliance.id)}
               className={`
                 px-4 py-2 rounded-full text-sm font-medium 

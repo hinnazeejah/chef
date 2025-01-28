@@ -38,6 +38,7 @@ const TimeInput: React.FC<TimeInputProps> = ({ selectedTime, onChange }) => {
           return (
             <button
               key={option.minutes}
+              type="button"
               onClick={() => onChange(option.minutes)}
               className={`
                 px-4 py-2 rounded-full text-sm font-medium 

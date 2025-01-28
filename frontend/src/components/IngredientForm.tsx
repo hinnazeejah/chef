@@ -2,6 +2,7 @@ import React, { useState, FormEvent } from 'react';
 import AutocompleteInput from './AutocompleteInput';
 import TimeInput from './TimeInput';
 import KitchenTools from './KitchenTools';
+import EffortLevel from './EffortLevel';
 
 interface DietaryPreference {
   id: string;
@@ -17,7 +18,7 @@ const dietaryPreferences: DietaryPreference[] = [
 ];
 
 interface IngredientFormProps {
-  onSubmit: (ingredients: string[], preferences: string[], time: number, appliances: string[]) => void;
+  onSubmit: (ingredients: string[], preferences: string[], time: number, appliances: string[], effortLevel: number) => void;
 }
 
 const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
@@ -25,6 +26,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
   const [selectedAppliances, setSelectedAppliances] = useState<string[]>([]);
+  const [effortLevel, setEffortLevel] = useState<number>(50);
 
   const togglePreference = (preferenceId: string): void => {
     if (preferenceId === 'none') {
@@ -44,7 +46,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const ingredientList = ingredients.split(',').map(i => i.trim());
-    onSubmit(ingredientList, selectedPreferences, selectedTime || 0, selectedAppliances);
+    onSubmit(ingredientList, selectedPreferences, selectedTime || 0, selectedAppliances, effortLevel);
   };
 
   return (
@@ -89,6 +91,8 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
         />
 
         <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
+
+        <EffortLevel value={effortLevel} onChange={setEffortLevel} />
 
         <button
           type="submit"
