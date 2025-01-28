@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
               className="w-8 h-8 object-contain"
             />
             <span className="text-2xl font-bold text-primary">
-              Chef Assistant
+              ReciPal
             </span>
           </Link>
 
