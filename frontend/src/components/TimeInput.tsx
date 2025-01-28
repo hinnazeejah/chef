@@ -58,13 +58,13 @@ const TimeInput: React.FC<TimeInputProps> = ({ selectedTime, onChange }) => {
 };
 
 const getGradientClass = (minutes: number): string => {
-  const baseClasses = 'hover:shadow-md hover:-translate-y-0.5 ';
+  const baseClasses = 'hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 ';
   if (minutes <= 30) {
-    return baseClasses + 'bg-gradient-to-r from-green-400 to-green-500 text-white';
+    return baseClasses + 'bg-primary text-white hover:bg-primary-light';
   } else if (minutes <= 60) {
-    return baseClasses + 'bg-gradient-to-r from-green-500 to-yellow-500 text-white';
+    return baseClasses + 'bg-food-brown text-white hover:bg-food-brown/90';
   } else {
-    return baseClasses + 'bg-gradient-to-r from-yellow-500 to-food-orange text-white';
+    return baseClasses + 'bg-secondary text-white hover:bg-secondary/90';
   }
 };
 

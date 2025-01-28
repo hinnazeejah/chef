@@ -56,17 +56,17 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <div className="bg-food-cream rounded-2xl p-6 shadow-lg">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 animate-fade-in">
+      <form onSubmit={handleSubmit} className="space-y-8">
         <div>
-          <label className="block text-food-brown font-medium mb-2">
+          <label className="block text-dark font-semibold mb-2 text-lg">
             What ingredients do you have?
           </label>
           <AutocompleteInput
             value={ingredients}
             onChange={setIngredients}
             placeholder="e.g. ramen, eggs, cheese"
-            className="w-full px-4 py-2 bg-white rounded-xl border-2 border-food-orange/20 focus:border-food-orange focus:outline-none"
+            className="w-full px-4 py-3 bg-neutral rounded-xl border-2 border-primary/10 focus:border-primary focus:outline-none transition-colors"
           />
         </div>
 
@@ -78,7 +78,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
         <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
 
         <div>
-          <label className="block text-food-brown font-medium mb-3">
+          <label className="block text-dark font-semibold mb-3 text-lg">
             Dietary Preferences
           </label>
           <div className="flex flex-wrap gap-2">
@@ -87,10 +87,10 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
                 key={preference.id}
                 type="button"
                 onClick={() => togglePreference(preference.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
                   selectedPreferences.includes(preference.id)
-                    ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
-                    : 'bg-white text-food-brown border border-food-orange/20 hover:border-food-orange'
+                    ? 'bg-primary text-white shadow-md hover:bg-primary-light'
+                    : 'bg-neutral text-dark border-2 border-primary/10 hover:border-primary'
                 }`}
               >
                 {preference.label}
@@ -103,7 +103,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
 
         <button
           type="submit"
-          className="w-full py-3 px-4 bg-gradient-to-r from-food-orange to-food-brown text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
+          className="w-full py-4 px-6 bg-primary text-white rounded-xl font-semibold text-lg shadow-lg hover:bg-primary-light transition-all duration-200 hover:-translate-y-0.5 focus:ring-4 focus:ring-primary/20"
         >
           Find Recipes
         </button>

@@ -7,24 +7,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'food-orange': '#D94E1F',
-        'food-cream': '#FFF9F2',
-        'food-sage': '#7C9082',
-        'food-brown': '#2C1810',
-        'food-peach': '#FFDED4',
+        'primary': '#9B2C2C',         // Deep red
+        'primary-light': '#C53030',   // Lighter red
+        'secondary': '#8B4513',       // Saddle brown
+        'food-brown': '#5C4033',      // Rich brown
+        'food-tan': '#D2B48C',        // Tan
+        'neutral': '#f8fafc',         // Light background
+        'dark': '#2D1810',           // Dark brown text
+        'success': '#2F855A',        // Forest green
+        'warning': '#C05621',        // Burnt orange
+        'error': '#9B2C2C',          // Deep red
       },
       animation: {
-        'shimmer': 'shimmer 1.5s infinite',
         'bounce-sm': 'bounce-sm 0.5s ease-in-out',
+        'fade-in': 'fade-in 0.3s ease-in',
       },
       keyframes: {
-        shimmer: {
-          '0%': { backgroundPosition: '-200%' },
-          '100%': { backgroundPosition: '200%' },
-        },
         'bounce-sm': {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-2px)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         }
       }
     },
