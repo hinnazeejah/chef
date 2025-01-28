@@ -105,19 +105,18 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
       <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-food-orange/10 to-food-peach/10 rounded-full blur-2xl" />
       <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-tr from-food-orange/10 to-food-peach/10 rounded-full blur-2xl" />
       
-      {/* Updated Progress Bar */}
+      {/* New Progress Bar Style */}
       <div className="mb-8">
         <div className="flex justify-between mb-2 text-xs text-food-brown/60">
-          <span className={currentStep >= 1 ? "text-food-orange font-medium" : ""}>Ingredients</span>
-          <span className={currentStep >= 2 ? "text-food-orange font-medium" : ""}>Appliances</span>
-          <span className={currentStep >= 3 ? "text-food-orange font-medium" : ""}>Time</span>
-          <span className={currentStep >= 4 ? "text-food-orange font-medium" : ""}>Preferences</span>
-          <span className={currentStep >= 5 ? "text-food-orange font-medium" : ""}>Budget</span>
+          <span>Ingredients</span>
+          <span>Appliances</span>
+          <span>Time</span>
+          <span>Preferences</span>
         </div>
         <div className="relative h-1 bg-food-cream rounded-full">
           <div 
-            className="absolute left-0 top-0 h-full bg-gradient-to-r from-food-orange to-food-peach rounded-full transition-all duration-500 ease-in-out"
-            style={{ width: `${(currentStep / 5) * 100}%` }}
+            className="absolute left-0 top-0 h-full bg-gradient-to-r from-food-orange to-food-peach rounded-full transition-all duration-300"
+            style={{ width: `${(currentStep / 4) * 100}%` }}
           />
         </div>
       </div>

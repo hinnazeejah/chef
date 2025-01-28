@@ -103,7 +103,22 @@ const CreateRecipe: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
+      {/* Scroll Indicator - Updated styling */}
+      <div className="relative py-8 mb-8 animate-pulse">
+        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[1px] bg-gradient-to-r from-transparent via-food-orange/30 to-transparent"></div>
+        <div className="relative flex justify-center">
+          <div className="bg-white px-6 py-2 rounded-full shadow-sm border border-food-orange/10">
+            <span className="text-sm text-food-brown/70 flex items-center gap-2">
+              Scroll for more options
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative">
         <div className="absolute -top-6 -left-6 w-12 h-12 bg-food-cream rounded-full opacity-50" />
         <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-food-cream rounded-full opacity-50" />
         <IngredientForm onSubmit={handleSubmit} />

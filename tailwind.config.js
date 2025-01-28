@@ -25,7 +25,9 @@ module.exports = {
       animation: {
         'bounce-sm': 'bounce-sm 0.5s ease-in-out',
         'fade-in': 'fadeIn 0.3s ease-in-out',
-        'slide-up': 'slideUp 0.4s ease-out'
+        'slide-up': 'slideUp 0.4s ease-out',
+        'scale-up': 'scaleUp 0.15s ease-in-out',
+        'pulse-light': 'pulseLight 2s infinite',
       },
       keyframes: {
         'bounce-sm': {
@@ -39,6 +41,14 @@ module.exports = {
         'slideUp': {
           '0%': { transform: 'translateY(10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' }
+        },
+        'scaleUp': {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.05)' }
+        },
+        'pulseLight': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.8' }
         }
       },
       fontFamily: {

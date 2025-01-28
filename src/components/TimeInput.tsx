@@ -54,8 +54,12 @@ const TimeInput: React.FC<TimeInputProps> = ({ selectedTime, onChange }) => {
               className={`
                 px-4 py-2 rounded-full text-sm font-medium 
                 transition-all duration-200 
+                hover:scale-105 hover:shadow-md
+                active:scale-95
                 ${isSelected ? 'animate-bounce-sm shadow-lg ring-2 ring-food-orange' : ''}
                 ${getGradientClass(option.minutes)}
+                hover:brightness-105 hover:-translate-y-0.5
+                focus:outline-none focus:ring-2 focus:ring-food-orange/50
               `}
             >
               <span>{option.label}</span>
