@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import Tooltip from './Tooltip';
 
@@ -10,6 +10,7 @@ interface Appliance {
 }
 
 const appliances: Appliance[] = [
+  { id: 'all', label: 'I have everything', icon: '✨', description: 'All appliances available' },
   { id: 'microwave', label: 'Microwave', icon: '🍔', description: 'Quick meals and reheating' },
   { id: 'blender', label: 'Blender', icon: '🥤', description: 'Smoothies and sauces' },
   { id: 'airfryer', label: 'Air Fryer', icon: '🍟', description: 'Crispy cooking without oil' },
@@ -24,26 +25,50 @@ interface KitchenToolsProps {
 }
 
 const KitchenTools: React.FC<KitchenToolsProps> = ({ selectedAppliances, onChange }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        onChange([]);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onChange]);
+
   const toggleAppliance = (applianceId: string) => {
-    onChange(
-      selectedAppliances.includes(applianceId)
-        ? selectedAppliances.filter(id => id !== applianceId)
-        : [...selectedAppliances, applianceId]
-    );
+    if (applianceId === 'all') {
+      // If all appliances are currently selected, deselect everything
+      if (selectedAppliances.length === appliances.length - 1) {
+        onChange([]);
+      } else {
+        // Otherwise, select all appliances except 'all'
+        onChange(appliances.filter(a => a.id !== 'all').map(a => a.id));
+      }
+      return;
+    }
+
+    // If selecting individual appliance, add/remove it from selection
+    const newSelection = selectedAppliances.includes(applianceId)
+      ? selectedAppliances.filter(id => id !== applianceId)
+      : [...selectedAppliances, applianceId];
+    
+    onChange(newSelection);
   };
 
   return (
-    <div className="space-y-3">
-      <div className="flex items-center gap-2">
-        <label className="block text-food-brown font-medium">What appliances do you own?</label>
-        <Tooltip content="We'll only show recipes that match your tools!">
-          <span className="cursor-help text-food-sage">ℹ️</span>
-        </Tooltip>
-      </div>
+    <div className="space-y-3" ref={containerRef}>
+      <label className="block text-food-brown font-medium">What appliances do you own?</label>
       
       <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2">
         {appliances.map((appliance) => {
-          const isSelected = selectedAppliances.includes(appliance.id);
+          const isSelected = appliance.id === 'all' 
+            ? selectedAppliances.length === appliances.length - 1 
+            : selectedAppliances.includes(appliance.id);
           return (
             <button
               key={appliance.id}
@@ -56,6 +81,7 @@ const KitchenTools: React.FC<KitchenToolsProps> = ({ selectedAppliances, onChang
                   ? 'bg-gradient-to-r from-food-orange to-yellow-500 text-white shadow-md' 
                   : 'bg-gray-100 text-food-brown hover:bg-gray-200'
                 }
+                ${appliance.id === 'all' ? 'col-span-2 md:w-full justify-center' : ''}
               `}
             >
               <span>{appliance.icon}</span>
@@ -67,10 +93,6 @@ const KitchenTools: React.FC<KitchenToolsProps> = ({ selectedAppliances, onChang
           );
         })}
       </div>
-      
-      {selectedAppliances.length === 0 && (
-        <p className="text-food-sage text-sm">No blender? No problem! We've got recipes for every setup.</p>
-      )}
     </div>
   );
 };

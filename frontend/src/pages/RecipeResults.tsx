@@ -11,12 +11,11 @@ const RecipeResults: React.FC = () => {
     return <Navigate to="/" replace />;
   }
 
-  const { recipes, userIngredients, preferences, appliances, effortLevel, userLocation } = location.state as {
+  const { recipes, userIngredients, preferences, appliances, userLocation } = location.state as {
     recipes: RecipeDetails[];
     userIngredients: string[];
     preferences: string[];
     appliances: string[];
-    effortLevel: number;
     userLocation: { lat: number; lng: number };
   };
 

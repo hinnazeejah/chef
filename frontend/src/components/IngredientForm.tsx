@@ -2,7 +2,6 @@ import React, { useState, FormEvent } from 'react';
 import AutocompleteInput from './AutocompleteInput';
 import TimeInput from './TimeInput';
 import KitchenTools from './KitchenTools';
-import EffortLevel from './EffortLevel';
 
 interface DietaryPreference {
   id: string;
@@ -18,7 +17,7 @@ const dietaryPreferences: DietaryPreference[] = [
 ];
 
 interface IngredientFormProps {
-  onSubmit: (ingredients: string[], preferences: string[], time: number, appliances: string[], effortLevel: number) => void;
+  onSubmit: (ingredients: string[], preferences: string[], time: number, appliances: string[]) => void;
 }
 
 const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
@@ -26,7 +25,6 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
   const [selectedAppliances, setSelectedAppliances] = useState<string[]>([]);
-  const [effortLevel, setEffortLevel] = useState<number>(50);
 
   const togglePreference = (preferenceId: string): void => {
     if (preferenceId === 'none') {
@@ -46,7 +44,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const ingredientList = ingredients.split(',').map(i => i.trim());
-    onSubmit(ingredientList, selectedPreferences, selectedTime || 0, selectedAppliances, effortLevel);
+    onSubmit(ingredientList, selectedPreferences, selectedTime || 0, selectedAppliances);
   };
 
   return (
@@ -60,8 +58,16 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
             value={ingredients}
             onChange={setIngredients}
             placeholder="e.g. ramen, eggs, cheese"
+            className="w-full px-4 py-2 bg-white rounded-xl border-2 border-food-orange/20 focus:border-food-orange focus:outline-none"
           />
         </div>
+
+        <KitchenTools 
+          selectedAppliances={selectedAppliances}
+          onChange={setSelectedAppliances}
+        />
+
+        <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
 
         <div>
           <label className="block text-food-brown font-medium mb-3">
@@ -85,20 +91,11 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
           </div>
         </div>
 
-        <KitchenTools 
-          selectedAppliances={selectedAppliances}
-          onChange={setSelectedAppliances}
-        />
-
-        <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
-
-        <EffortLevel value={effortLevel} onChange={setEffortLevel} />
-
         <button
           type="submit"
           className="w-full py-3 px-4 bg-gradient-to-r from-food-orange to-food-brown text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
         >
-          Find Budget-Friendly Recipes
+          Find Recipes
         </button>
       </form>
     </div>
