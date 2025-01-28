@@ -37,7 +37,7 @@ const RecipeResults: React.FC = () => {
   ));
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="pt-24 p-6 space-y-8">
       <div className="bg-food-cream rounded-xl p-6">
         <h2 className="text-2xl font-bold text-food-brown mb-2">Your Search</h2>
         <div className="flex flex-wrap gap-2">
