@@ -1,4 +1,3 @@
-
 const colors = require('tailwindcss/colors')
 
 module.exports = {
@@ -14,14 +13,14 @@ module.exports = {
         'food-brown': '#2D1810',
         'primary': '#FF6B35',
         'primary-light': '#FF8B60',
-        'secondary': '#FFFDE3',       // Light cream
-        'secondary-light': '#CFE8A9', // Sage green
-        'food-brown-light': '#E64848', // Lighter red
+        'secondary': '#FFFDE3',
+        'secondary-light': '#CFE8A9',
+        'food-brown-light': '#E64848',
         'neutral': '#F7F7F7',
-        'dark': '#1F1F1F',           // Darker text for better contrast
-        'success': '#CFE8A9',        // Sage green for success
-        'warning': '#E64848',        // Lighter red for warnings
-        'error': '#C21010',          // Deep red for errors
+        'dark': '#1F1F1F',
+        'success': '#CFE8A9',
+        'warning': '#E64848',
+        'error': '#C21010',
       },
       animation: {
         'bounce-sm': 'bounce-sm 0.5s ease-in-out',
@@ -48,4 +47,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+} 
