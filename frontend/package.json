@@ -9,6 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@react-google-maps/api": "^2.20.5",
     "@types/google-maps-react": "^2.0.5",
     "@types/node": "^16.18.0",

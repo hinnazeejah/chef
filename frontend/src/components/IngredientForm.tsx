@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AutocompleteInput from './AutocompleteInput';
+import TimeInput from './TimeInput';
 
 interface DietaryPreference {
   id: string;
@@ -15,12 +16,13 @@ const dietaryPreferences: DietaryPreference[] = [
 ];
 
 interface IngredientFormProps {
-  onSubmit: (ingredients: string[], preferences: string[]) => void;
+  onSubmit: (ingredients: string[], preferences: string[], time: number) => void;
 }
 
 const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const [ingredients, setIngredients] = useState('');
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
+  const [selectedTime, setSelectedTime] = useState<number | null>(null);
 
   const togglePreference = (preferenceId: string) => {
     if (preferenceId === 'none') {
@@ -40,7 +42,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const ingredientList = ingredients.split(',').map(i => i.trim());
-    onSubmit(ingredientList, selectedPreferences);
+    onSubmit(ingredientList, selectedPreferences, selectedTime || 0);
   };
 
   return (
@@ -78,6 +80,8 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
             ))}
           </div>
         </div>
+
+        <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
 
         <button
           type="submit"
