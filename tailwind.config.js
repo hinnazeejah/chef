@@ -8,12 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'food-orange': '#FF6B35',
+        'food-orange': '#FF3B3B',
         'food-sage': '#8BB174',
-        'food-cream': '#FFF9F4',
+        'food-cream': '#FFF4F4',
         'food-brown': '#2B2119',
-        'primary': '#FF6B35',
-        'primary-light': '#FF8B60',
+        'primary': '#FF3B3B',
+        'primary-light': '#FF6B6B',
         'secondary': '#FFFDE3',
         'secondary-light': '#CFE8A9',
         'food-brown-light': '#E64848',
@@ -32,6 +32,10 @@ module.exports = {
         'slide-down': 'slideDown 0.2s ease-out',
         'float-smooth': 'floatSmooth 6s ease-in-out infinite',
         'pulse-slow': 'pulseSlow 4s ease-in-out infinite',
+        'wiggle': 'wiggle 0.5s ease-in-out',
+        'pop': 'pop 0.3s ease-out',
+        'shine': 'shine 2s infinite',
+        'bounce-in': 'bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
       },
       keyframes: {
         'bounce-sm': {
@@ -66,9 +70,29 @@ module.exports = {
           '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
           '50%': { opacity: 0.7, transform: 'scale(1.05)' },
         },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        pop: {
+          '0%': { transform: 'scale(0.95)', opacity: '0.5' },
+          '50%': { transform: 'scale(1.05)' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        shine: {
+          '0%': { backgroundPosition: '200% center' },
+          '100%': { backgroundPosition: '-200% center' },
+        },
+        bounceIn: {
+          '0%': { transform: 'scale(0.3)', opacity: '0' },
+          '50%': { transform: 'scale(1.05)' },
+          '70%': { transform: 'scale(0.9)' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
       },
       fontFamily: {
-        cinderela: ['Cinderela', 'cursive'],
+        'sans': ['Roboto', 'sans-serif'],
+        'cinderela': ['Cinderela', 'cursive'],
       },
     },
   },
