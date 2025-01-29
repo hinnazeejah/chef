@@ -64,14 +64,6 @@ const CreateRecipe: React.FC = () => {
     });
   };
 
-  const steps = [
-    { name: 'Ingredients', status: 'current' },
-    { name: 'Appliances', status: 'upcoming' },
-    { name: 'Time', status: 'upcoming' },
-    { name: 'Budget', status: 'upcoming' },
-    { name: 'Preferences', status: 'upcoming' }
-  ];
-
   return (
     <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto pt-28 px-4 md:px-6">
       <div className="text-center mb-12 animate-fade-in">
