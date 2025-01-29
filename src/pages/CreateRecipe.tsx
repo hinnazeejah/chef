@@ -79,12 +79,15 @@ const CreateRecipe: React.FC = () => {
   return (
     <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto pt-28 px-4 md:px-6">
       <div className="text-center mb-12 animate-fade-in">
-        <h1 className="text-3xl md:text-4xl font-sans font-bold text-food-orange mb-3 drop-shadow-lg tracking-tight">
-          Create Your Perfect Recipe
-        </h1>
-        <div className="w-20 h-0.5 bg-gradient-to-r from-food-orange/40 via-food-orange to-food-orange/40 mx-auto mb-6" />
-        <p className="text-food-brown/80 text-lg font-medium mb-8">
-          Tell us what you have, and we'll do the magic ✨
+        <div className="relative inline-block">
+          <SparklesIcon className="w-5 h-5 text-food-orange/40 absolute -left-8 top-1/2 -translate-y-1/2" />
+          <h1 className="text-3xl md:text-4xl font-sans font-bold text-food-orange mb-3 tracking-tight">
+            Find Your Perfect Recipe
+          </h1>
+          <SparklesIcon className="w-5 h-5 text-food-orange/40 absolute -right-8 top-1/2 -translate-y-1/2" />
+        </div>
+        <p className="text-food-brown/80 text-lg font-medium mt-4">
+          Tell us what you have, and we'll do the magic!
         </p>
         
         <div className="grid grid-cols-3 gap-3 md:gap-6 mt-8 px-2">
