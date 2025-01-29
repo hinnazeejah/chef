@@ -53,16 +53,17 @@ const Hero: React.FC = () => {
 
         {/* Hero Image */}
         <div className="relative md:absolute md:right-[10%] md:top-1/2 md:transform md:-translate-y-1/2 
-          w-[50%] sm:w-[45%] md:w-[40%] lg:w-[35%] max-w-[500px] h-auto z-20 mt-12 md:mt-0
-          group hover:scale-105 transition-all duration-500 ease-out">
-          <div className="absolute inset-0 bg-gradient-to-r from-food-orange/20 to-food-orange/0 rounded-full 
-            blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-0 group-hover:opacity-70"></div>
+          w-[50%] sm:w-[45%] md:w-[40%] lg:w-[35%] max-w-[500px] h-auto z-20 mt-12 md:mt-0">
+          {/* Gradient Glow Effect - Desktop Only */}
+          <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-food-orange/20 via-food-cream to-food-orange/10 rounded-full 
+            blur-3xl transition-all duration-700 opacity-0 animate-pulse-slow"></div>
+          
+          {/* Image */}
           <img 
             src={hi} 
             alt="Hero Illustration" 
-            className="w-full h-full object-contain drop-shadow-xl animate-float 
-              group-hover:drop-shadow-2xl transition-all duration-500
-              group-hover:rotate-3 group-hover:-translate-y-2"
+            className="w-full h-full object-contain relative z-10
+              md:animate-float-smooth"
           />
         </div>
       </div>

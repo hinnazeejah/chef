@@ -29,6 +29,9 @@ module.exports = {
         'slide-up': 'slideUp 0.4s ease-out',
         'scale-up': 'scaleUp 0.15s ease-in-out',
         'pulse-light': 'pulseLight 2s infinite',
+        'slide-down': 'slideDown 0.2s ease-out',
+        'float-smooth': 'floatSmooth 6s ease-in-out infinite',
+        'pulse-slow': 'pulseSlow 4s ease-in-out infinite',
       },
       keyframes: {
         'bounce-sm': {
@@ -50,7 +53,19 @@ module.exports = {
         'pulseLight': {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.8' }
-        }
+        },
+        'slideDown': {
+          '0%': { transform: 'translateY(-10%)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
+        floatSmooth: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        pulseSlow: {
+          '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
+          '50%': { opacity: 0.7, transform: 'scale(1.05)' },
+        },
       },
       fontFamily: {
         cinderela: ['Cinderela', 'cursive'],
