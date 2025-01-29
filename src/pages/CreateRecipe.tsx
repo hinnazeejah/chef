@@ -3,6 +3,7 @@ import IngredientForm from '../components/IngredientForm';
 import { useNavigate } from 'react-router-dom';
 import { ClockIcon, SparklesIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Navbar from '../components/Navbar';
+import cookingIcon from '../assets/icons/cooking.png';
 
 const CreateRecipe: React.FC = () => {
   const navigate = useNavigate();
@@ -74,18 +75,23 @@ const CreateRecipe: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto pt-28 px-4 md:px-6">
-        <div className="text-center mb-12 animate-fade-in">
+      <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto pt-36 px-4 md:px-6">
+        <div className="text-center mb-10 animate-fade-in">
           <div className="relative inline-block">
-            <SparklesIcon className="w-5 h-5 text-food-orange/40 absolute -left-8 top-1/2 -translate-y-1/2" />
-            <h1 className="text-3xl md:text-4xl font-sans font-bold text-food-orange mb-3 tracking-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-sans font-bold text-food-orange mb-2 tracking-tight">
               Find Your Perfect Recipe
             </h1>
-            <SparklesIcon className="w-5 h-5 text-food-orange/40 absolute -right-8 top-1/2 -translate-y-1/2" />
           </div>
-          <p className="text-food-brown/80 text-lg font-medium mt-4">
+          <p className="text-food-brown/80 text-base md:text-lg font-medium mt-3 mb-5">
             Tell us what you have, and we'll do the magic!
           </p>
+          <div className="flex justify-center">
+            <img 
+              src={cookingIcon}
+              alt="Cooking icon"
+              className="w-10 h-10 opacity-90 hover:opacity-100 transition-opacity duration-300"
+            />
+          </div>
           
           <div className="grid grid-cols-3 gap-3 md:gap-6 mt-8 px-2">
             <div className="bg-white/80 backdrop-blur-sm p-3 md:p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
