@@ -8,8 +8,8 @@ const Hero: React.FC = () => {
 
   return (
     <div className="relative h-screen overflow-hidden bg-white">
-      {/* Curved Shape Background */}
-      <div className="absolute top-0 right-0 w-[70%] h-screen">
+      {/* Curved Shape Background - Hidden on mobile */}
+      <div className="hidden md:block absolute top-0 right-0 w-[70%] h-screen">
         <svg
           className="h-full w-full"
           viewBox="0 0 100 100"
@@ -24,24 +24,25 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center container mx-auto px-8 lg:px-12">
-        <div className="text-left max-w-2xl">
-          <h1 className="flex flex-col gap-8">
-            <span className="text-4xl md:text-5xl font-sans font-bold text-food-brown drop-shadow-lg tracking-tight">
+      <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-center md:justify-start container mx-auto px-6 md:pl-4 lg:pl-8">
+        {/* Text Content */}
+        <div className="text-center md:text-left max-w-2xl mt-24 md:mt-0">
+          <h1 className="flex flex-col gap-4 md:gap-8">
+            <span className="text-3xl sm:text-4xl md:text-5xl font-sans font-bold text-food-brown drop-shadow-lg tracking-tight">
               Turn Your Ingredients Into
             </span>
-            <span className="text-5xl md:text-7xl font-cinderela text-food-orange drop-shadow-lg leading-tight">
+            <span className="text-4xl sm:text-5xl md:text-7xl font-cinderela text-food-orange drop-shadow-lg leading-tight">
               Delicious Meals
             </span>
           </h1>
           
-          <p className="text-xl text-food-brown/90 mb-12 max-w-xl drop-shadow-md font-medium mt-8">
+          <p className="text-lg md:text-xl text-food-brown/90 mb-8 md:mb-12 max-w-xl mx-auto md:mx-0 drop-shadow-md font-medium mt-6 md:mt-8">
             Tell us what's in your kitchen, and we'll find the perfect recipes while helping you save money on missing ingredients.
           </p>
 
           <button
             onClick={() => navigate('/create-recipe')}
-            className="bg-food-orange text-white px-8 py-4 rounded-full text-lg font-medium
+            className="bg-food-orange text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-medium
               hover:bg-food-orange/90 transform hover:scale-105 transition-all duration-300
               shadow-lg hover:shadow-xl"
           >
@@ -51,11 +52,17 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Hero Image */}
-        <div className="absolute right-[10%] top-1/2 transform -translate-y-1/2 w-[35%] max-w-[500px] h-auto z-20">
+        <div className="relative md:absolute md:right-[10%] md:top-1/2 md:transform md:-translate-y-1/2 
+          w-[50%] sm:w-[45%] md:w-[40%] lg:w-[35%] max-w-[500px] h-auto z-20 mt-12 md:mt-0
+          group hover:scale-105 transition-all duration-500 ease-out">
+          <div className="absolute inset-0 bg-gradient-to-r from-food-orange/20 to-food-orange/0 rounded-full 
+            blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-0 group-hover:opacity-70"></div>
           <img 
             src={hi} 
             alt="Hero Illustration" 
-            className="w-full h-full object-contain drop-shadow-xl animate-float"
+            className="w-full h-full object-contain drop-shadow-xl animate-float 
+              group-hover:drop-shadow-2xl transition-all duration-500
+              group-hover:rotate-3 group-hover:-translate-y-2"
           />
         </div>
       </div>
