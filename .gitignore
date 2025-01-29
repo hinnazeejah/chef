@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Environment files
 .env
 .env.local
@@ -9,27 +8,12 @@
 
 # Build and dependencies
 /node_modules
-/frontend/node_modules
 /build
-/frontend/build
 
 # OS files
 .DS_Store
 .DS_Store?
-frontend/.DS_Store
 
-# Cache
-frontend/node_modules/.cache
-
-# Dependencies
-=======
-# dependencies
->>>>>>> origin/main
-/node_modules
-/.pnp
-.pnp.js
-
-<<<<<<< HEAD
 # Testing
 /coverage
 
@@ -38,16 +22,6 @@ frontend/node_modules/.cache
 /dist
 
 # Misc
-=======
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
->>>>>>> origin/main
 .env.local
 .env.development.local
 .env.test.local
@@ -55,9 +29,4 @@ frontend/node_modules/.cache
 
 npm-debug.log*
 yarn-debug.log*
-<<<<<<< HEAD
-yarn-error.log* 
-=======
 yarn-error.log*
-.env
->>>>>>> origin/main
