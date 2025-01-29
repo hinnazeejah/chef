@@ -93,6 +93,7 @@ module.exports = {
       fontFamily: {
         'sans': ['Roboto', 'sans-serif'],
         'cinderela': ['Cinderela', 'cursive'],
+        'montserrat': ['Montserrat', 'sans-serif'],
       },
     },
   },
