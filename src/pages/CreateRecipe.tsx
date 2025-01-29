@@ -26,10 +26,7 @@ const CreateRecipe: React.FC = () => {
 
   const handleSubmit = async (
     ingredients: string[], 
-    preferences: string[], 
-    time: number,
-    appliances: string[],
-    budget: number | null
+    preferences: string[]
   ) => {
     // Mock recipe data for now
     const mockRecipes = [{
@@ -62,7 +59,6 @@ const CreateRecipe: React.FC = () => {
         recipes: mockRecipes,
         userIngredients: ingredients,
         preferences: preferences,
-        appliances: appliances,
         userLocation: userLocation
       }
     });

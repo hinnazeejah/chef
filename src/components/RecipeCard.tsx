@@ -8,14 +8,12 @@ interface RecipeCardProps {
   recipe: Recipe | RecipeDetails;
   onViewRecipe: (id: string) => void;
   showSaveButton?: boolean;
-  onRemove?: () => void;
 }
 
 const RecipeCard: React.FC<RecipeCardProps> = ({ 
   recipe, 
   onViewRecipe, 
   showSaveButton = true,
-  onRemove 
 }) => {
   const { saveRecipe, removeRecipe, isSaved } = useSavedRecipes();
   const saved = isSaved(recipe.id);
