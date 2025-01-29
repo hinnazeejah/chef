@@ -68,7 +68,8 @@ const CreateRecipe: React.FC = () => {
         timeLimit: timeLimit,
         budget: budget,
         userLocation: userLocation
-      }
+      },
+      replace: true
     });
   };
 

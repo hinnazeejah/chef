@@ -22,6 +22,11 @@ const RecipeResults: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Add this useEffect to scroll to top on component mount
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (!location.state) {
     return <Navigate to="/" replace />;
   }

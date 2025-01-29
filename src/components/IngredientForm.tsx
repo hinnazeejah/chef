@@ -18,16 +18,8 @@ const dietaryPreferences: DietaryPreference[] = [
   { id: 'vegan', label: 'Vegan' },
   { id: 'gluten-free', label: 'Gluten-Free' },
   { id: 'dairy-free', label: 'Dairy-Free' },
-  { 
-    id: 'halal', 
-    label: 'Halal',
-    description: 'No pork, alcohol, and only halal-certified meat.'
-  },
-  { 
-    id: 'kosher', 
-    label: 'Kosher',
-    description: 'Follows Jewish dietary laws, including meat and dairy separation.'
-  }
+  { id: 'halal', label: 'Halal' },
+  { id: 'kosher', label: 'Kosher' }
 ];
 
 interface IngredientFormProps {
@@ -74,15 +66,19 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
 
   const togglePreference = (preferenceId: string): void => {
     if (preferenceId === 'none') {
-      setPreferences([]);
+      setPreferences(['none']);
       return;
     }
     
     setPreferences((prev: string[]) => {
+      if (prev.includes('none')) {
+        return [preferenceId];
+      }
+      
       if (prev.includes(preferenceId)) {
         return prev.filter(id => id !== preferenceId);
       } else {
-        return [...prev.filter(id => id !== 'none'), preferenceId];
+        return [...prev, preferenceId];
       }
     });
   };
