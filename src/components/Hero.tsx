@@ -1,29 +1,33 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import heroImage from '../assets/icons/hero-food.png';
+import hi from '../assets/icons/hi.png';
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative h-screen">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="Background" 
-          className="w-full h-screen object-cover opacity-75"
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30" />
+    <div className="relative h-screen overflow-hidden bg-white">
+      {/* Curved Shape Background */}
+      <div className="absolute top-0 right-0 w-[70%] h-screen">
+        <svg
+          className="h-full w-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M65,0 C55,0 45,25 55,50 C65,75 75,100 100,100 L100,0 Z"
+            fill="#FFE5E5"
+          />
+        </svg>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center justify-center pt-20">
-        <div className="text-center max-w-3xl mx-auto px-4">
+      <div className="relative z-10 h-full flex items-center container mx-auto px-8 lg:px-12">
+        <div className="text-left max-w-2xl">
           <h1 className="flex flex-col gap-8">
-            <span className="text-4xl md:text-5xl font-sans font-bold text-white drop-shadow-lg tracking-tight">
+            <span className="text-4xl md:text-5xl font-sans font-bold text-food-brown drop-shadow-lg tracking-tight">
               Turn Your Ingredients Into
             </span>
             <span className="text-5xl md:text-7xl font-cinderela text-food-orange drop-shadow-lg leading-tight">
@@ -31,7 +35,7 @@ const Hero: React.FC = () => {
             </span>
           </h1>
           
-          <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto drop-shadow-md font-medium mt-8">
+          <p className="text-xl text-food-brown/90 mb-12 max-w-xl drop-shadow-md font-medium mt-8">
             Tell us what's in your kitchen, and we'll find the perfect recipes while helping you save money on missing ingredients.
           </p>
 
@@ -44,6 +48,15 @@ const Hero: React.FC = () => {
             Get Started
             <ChevronRightIcon className="w-5 h-5 inline-block ml-2" />
           </button>
+        </div>
+
+        {/* Hero Image */}
+        <div className="absolute right-[10%] top-1/2 transform -translate-y-1/2 w-[35%] max-w-[500px] h-auto z-20">
+          <img 
+            src={hi} 
+            alt="Hero Illustration" 
+            className="w-full h-full object-contain drop-shadow-xl animate-float"
+          />
         </div>
       </div>
     </div>
