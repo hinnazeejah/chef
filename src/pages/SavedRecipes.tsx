@@ -18,11 +18,20 @@ const SavedRecipes: React.FC = () => {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen pt-24 px-6">
+        <div className="min-h-screen pt-32 px-6">
           <div className="container mx-auto">
-            <div className="flex items-center gap-3 mb-8">
-              <h1 className="text-3xl font-bold text-food-brown">Saved Recipes</h1>
-              <BookmarkIcon className="w-6 h-6 text-food-orange" />
+            <div className="text-center mb-10">
+              <div className="relative inline-block">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-cinderela font-normal text-food-orange mb-2 tracking-tight">
+                  Saved Recipes
+                </h1>
+              </div>
+              <p className="text-food-brown/60 text-base md:text-lg mt-2">
+                Your collection of favorite recipes!
+              </p>
+              <div className="absolute inset-x-0 -bottom-4">
+                <div className="h-px bg-gradient-to-r from-transparent via-food-orange/20 to-transparent" />
+              </div>
             </div>
 
             <div className="flex flex-col items-center justify-center h-[60vh] text-center">
@@ -45,13 +54,23 @@ const SavedRecipes: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen pt-24 px-6">
+      <div className="min-h-screen pt-32 px-6">
         <div className="container mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <h1 className="text-3xl font-bold text-food-brown">Saved Recipes</h1>
-            <BookmarkIcon className="w-6 h-6 text-food-orange" />
+          <div className="text-center mb-10">
+            <div className="relative inline-block">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-cinderela font-normal text-food-orange mb-2 tracking-tight">
+                Saved Recipes
+              </h1>
+            </div>
+            <p className="text-food-brown/60 text-base md:text-lg mt-2">
+              Your collection of favorite recipes
+            </p>
+            <div className="absolute inset-x-0 -bottom-4">
+              <div className="h-px bg-gradient-to-r from-transparent via-food-orange/20 to-transparent" />
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-2 md:px-0">
             {savedRecipes.map(recipe => (
               <RecipeCard 
                 key={recipe.id} 

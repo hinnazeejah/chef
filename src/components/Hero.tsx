@@ -27,27 +27,27 @@ const Hero: React.FC = () => {
       <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-center md:justify-start container mx-auto px-6 md:pl-4 lg:pl-8">
         {/* Text Content */}
         <div className="text-center md:text-left max-w-2xl mt-24 md:mt-0">
-          <h1 className="flex flex-col gap-4 md:gap-8">
-            <span className="text-3xl sm:text-4xl md:text-5xl font-sans font-bold text-food-brown drop-shadow-lg tracking-tight">
+          <h1 className="flex flex-col gap-2 md:gap-4">
+            <span className="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-food-brown/90 drop-shadow-sm tracking-tight">
               Turn Your Ingredients Into
             </span>
-            <span className="text-4xl sm:text-5xl md:text-7xl font-cinderela text-food-orange drop-shadow-lg leading-tight">
+            <span className="text-5xl sm:text-6xl md:text-8xl font-cinderela text-food-orange drop-shadow-xl leading-tight mt-2">
               Delicious Meals
             </span>
           </h1>
           
-          <p className="text-lg md:text-xl text-food-brown/90 mb-8 md:mb-12 max-w-xl mx-auto md:mx-0 drop-shadow-md font-medium mt-6 md:mt-8">
+          <p className="text-lg md:text-xl text-food-brown/80 mb-8 md:mb-12 max-w-xl mx-auto md:mx-0 drop-shadow-sm font-medium mt-8 md:mt-10">
             Tell us what's in your kitchen, and we'll find the perfect recipes while helping you save money on missing ingredients.
           </p>
 
           <button
             onClick={() => navigate('/create-recipe')}
-            className="bg-food-orange text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-medium
+            className="bg-food-orange text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-lg md:text-xl font-medium
               hover:bg-food-orange/90 transform hover:scale-105 transition-all duration-300
-              shadow-lg hover:shadow-xl"
+              shadow-xl hover:shadow-2xl"
           >
             Get Started
-            <ChevronRightIcon className="w-5 h-5 inline-block ml-2" />
+            <ChevronRightIcon className="w-6 h-6 inline-block ml-2" />
           </button>
         </div>
 

@@ -78,7 +78,7 @@ const CreateRecipe: React.FC = () => {
       <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto pt-36 px-4 md:px-6">
         <div className="text-center mb-10 animate-fade-in">
           <div className="relative inline-block">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-sans font-bold text-food-orange mb-2 tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-cinderela font-normal text-food-orange mb-2 tracking-tight">
               Find Your Perfect Recipe
             </h1>
           </div>

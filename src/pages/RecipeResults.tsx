@@ -117,12 +117,12 @@ const RecipeResults: React.FC = () => {
   return (
     <>
       <Navbar />
-      <main className="container mx-auto pt-32 px-4 md:px-6">
+      <main className="container mx-auto pt-32 px-6 md:px-8 lg:px-6">
         {/* Search Summary Section */}
         <div className="mb-12">
           <div className="relative mb-8">
             <div className="flex items-center justify-center gap-3">
-              <h2 className="text-3xl md:text-4xl font-bold text-food-brown relative">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-cinderela font-normal text-food-orange relative">
                 Your Search
               </h2>
             </div>
@@ -224,12 +224,16 @@ const RecipeResults: React.FC = () => {
 
         {/* Recipe Results Section */}
         <div>
-          <div className="flex items-center gap-2 mb-8">
-            <h2 className="text-2xl font-bold text-food-brown">Recipe Suggestions</h2>
-            <span className="text-food-orange/60 text-lg">({mockRecipes.length})</span>
+          <div className="flex items-center gap-3 mb-8 px-2 md:px-0">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-cinderela font-normal text-food-orange">
+              Recipe Suggestions
+            </h2>
+            <span className="text-food-orange/60 text-lg md:text-xl font-medium mt-1">
+              ({mockRecipes.length})
+            </span>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-2 md:px-0">
             {mockRecipes.map(recipe => (
               <div key={recipe.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative">
                 <img 
