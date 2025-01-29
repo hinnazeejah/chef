@@ -68,6 +68,14 @@ const CreateRecipe: React.FC = () => {
     });
   };
 
+  const steps = [
+    { name: 'Ingredients', status: 'current' },
+    { name: 'Appliances', status: 'upcoming' },
+    { name: 'Time', status: 'upcoming' },
+    { name: 'Budget', status: 'upcoming' },
+    { name: 'Preferences', status: 'upcoming' }
+  ];
+
   return (
     <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto pt-28 px-4 md:px-6">
       <div className="text-center mb-12 animate-fade-in">
@@ -99,21 +107,6 @@ const CreateRecipe: React.FC = () => {
               <ShoppingCartIcon className="w-5 h-5 text-food-orange" />
             </div>
             <h3 className="font-medium text-food-brown text-xs md:text-sm">Cost Efficient</h3>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator - Updated styling */}
-      <div className="relative py-8 mb-8 animate-pulse">
-        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[1px] bg-gradient-to-r from-transparent via-food-orange/30 to-transparent"></div>
-        <div className="relative flex justify-center">
-          <div className="bg-white px-6 py-2 rounded-full shadow-sm border border-food-orange/10">
-            <span className="text-sm text-food-brown/70 flex items-center gap-2">
-              Scroll for more options
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </span>
           </div>
         </div>
       </div>

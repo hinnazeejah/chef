@@ -3,14 +3,15 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html"
   ],
   theme: {
     extend: {
       colors: {
         'food-orange': '#FF6B35',
         'food-sage': '#8BB174',
-        'food-cream': '#FFF9F0',
-        'food-brown': '#2D1810',
+        'food-cream': '#FFF9F4',
+        'food-brown': '#2B2119',
         'primary': '#FF6B35',
         'primary-light': '#FF8B60',
         'secondary': '#FFFDE3',

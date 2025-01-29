@@ -112,11 +112,12 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
           <span>Appliances</span>
           <span>Time</span>
           <span>Preferences</span>
+          <span>Budget</span>
         </div>
         <div className="relative h-1 bg-food-cream rounded-full">
           <div 
             className="absolute left-0 top-0 h-full bg-gradient-to-r from-food-orange to-food-peach rounded-full transition-all duration-300"
-            style={{ width: `${(currentStep / 4) * 100}%` }}
+            style={{ width: `${(currentStep / 5) * 100}%` }}
           />
         </div>
       </div>
