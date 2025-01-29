@@ -31,47 +31,54 @@ const dietaryPreferences: DietaryPreference[] = [
 ];
 
 interface IngredientFormProps {
-  onSubmit: (ingredients: string[], preferences: string[], time: number, appliances: string[], budget: number | null) => void;
+  onSubmit: (
+    ingredients: string[], 
+    preferences: string[],
+    appliances: string[],
+    timeLimit: number,
+    budget: number
+  ) => void;
 }
 
 const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const [ingredients, setIngredients] = useState<string>('');
-  const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
-  const [selectedTime, setSelectedTime] = useState<number | null>(null);
-  const [selectedAppliances, setSelectedAppliances] = useState<string[]>([]);
-  const [budget, setBudget] = useState<number | ''>('');
+  const [ingredientsList, setIngredientsList] = useState<string[]>([]);
+  const [preferences, setPreferences] = useState<string[]>([]);
+  const [appliances, setAppliances] = useState<string[]>([]);
+  const [timeLimit, setTimeLimit] = useState<number | null>(null);
+  const [budget, setBudget] = useState<number | ''>(0);
   const [currentStep, setCurrentStep] = useState<number>(0);
 
   useEffect(() => {
     let completedSteps = 0;
     
-    if (ingredients.trim().length > 0) {
+    if (ingredientsList.length > 0) {
       completedSteps++;
       completedSteps++; // Automatically complete appliances step
     }
     
-    if (selectedTime !== null) {
+    if (timeLimit !== null) {
       completedSteps++;
     }
     
-    if (selectedPreferences.length > 0) {
+    if (preferences.length > 0) {
       completedSteps++;
     }
 
-    if (typeof budget === 'number' && budget > 0) {
+    if (budget !== 0) {
       completedSteps++;
     }
     
     setCurrentStep(completedSteps);
-  }, [ingredients, selectedTime, selectedPreferences, budget]);
+  }, [ingredientsList, timeLimit, preferences, budget]);
 
   const togglePreference = (preferenceId: string): void => {
     if (preferenceId === 'none') {
-      setSelectedPreferences([]);
+      setPreferences([]);
       return;
     }
     
-    setSelectedPreferences((prev: string[]) => {
+    setPreferences((prev: string[]) => {
       if (prev.includes(preferenceId)) {
         return prev.filter(id => id !== preferenceId);
       } else {
@@ -80,27 +87,22 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (timeLimit === null) return;
     
-    if (!ingredients.trim()) {
-      alert('Please enter some ingredients');
-      return;
-    }
-    
-    if (selectedTime === null) {
-      alert('Please select a cooking time');
-      return;
-    }
-
-    const ingredientList = ingredients.split(',').map(i => i.trim());
     onSubmit(
-      ingredientList, 
-      selectedPreferences, 
-      selectedTime, 
-      selectedAppliances,
-      typeof budget === 'number' ? budget : null
+      ingredientsList,
+      preferences,
+      appliances,
+      timeLimit,
+      budget || 0
     );
+  };
+
+  const handleIngredientsChange = (value: string) => {
+    setIngredients(value);
+    setIngredientsList(value.split(',').map(i => i.trim()).filter(i => i));
   };
 
   const isSectionEnabled = (section: 'ingredients' | 'appliances' | 'time' | 'preferences' | 'budget'): boolean => {
@@ -108,13 +110,13 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
       case 'ingredients':
         return true;
       case 'appliances':
-        return ingredients.trim().length > 0;
+        return ingredientsList.length > 0;
       case 'time':
-        return ingredients.trim().length > 0;
+        return ingredientsList.length > 0;
       case 'preferences':
-        return ingredients.trim().length > 0 && selectedTime !== null;
+        return ingredientsList.length > 0 && timeLimit !== null;
       case 'budget':
-        return ingredients.trim().length > 0 && selectedTime !== null && selectedPreferences.length > 0;
+        return ingredientsList.length > 0 && timeLimit !== null && preferences.length > 0;
       default:
         return false;
     }
@@ -150,7 +152,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
           </label>
           <AutocompleteInput
             value={ingredients}
-            onChange={setIngredients}
+            onChange={handleIngredientsChange}
             placeholder="e.g. ramen, eggs, cheese"
             className="w-full px-4 py-3 bg-neutral rounded-xl border-2 border-primary/10 focus:border-primary focus:outline-none transition-colors"
           />
@@ -158,13 +160,16 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
 
         <div className={`transition-opacity duration-300 ${!isSectionEnabled('appliances') ? 'opacity-50 pointer-events-none' : ''}`}>
           <KitchenTools 
-            selectedAppliances={selectedAppliances}
-            onChange={setSelectedAppliances}
+            selectedAppliances={appliances}
+            onChange={setAppliances}
           />
         </div>
 
         <div className={`transition-opacity duration-300 ${!isSectionEnabled('time') ? 'opacity-50 pointer-events-none' : ''}`}>
-          <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
+          <TimeInput 
+            selectedTime={timeLimit || 0} 
+            onChange={(minutes: number | null) => setTimeLimit(minutes)}
+          />
         </div>
 
         <div className={`transition-opacity duration-300 ${!isSectionEnabled('preferences') ? 'opacity-50 pointer-events-none' : ''}`}>
@@ -178,7 +183,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
                   type="button"
                   onClick={() => togglePreference(preference.id)}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
-                    selectedPreferences.includes(preference.id)
+                    preferences.includes(preference.id)
                       ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
                       : 'bg-neutral text-dark border-2 border-food-orange/10 hover:border-food-orange'
                   }`}
@@ -196,7 +201,10 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
         </div>
 
         <div className={`transition-opacity duration-300 ${!isSectionEnabled('budget') ? 'opacity-50 pointer-events-none' : ''}`}>
-          <BudgetInput value={budget} onChange={setBudget} />
+          <BudgetInput 
+            value={budget} 
+            onChange={(value: number | '') => setBudget(value)}
+          />
         </div>
 
         <button

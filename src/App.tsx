@@ -4,17 +4,20 @@ import Home from './pages/Home';
 import CreateRecipe from './pages/CreateRecipe';
 import RecipeResults from './pages/RecipeResults';
 import SavedRecipes from './pages/SavedRecipes';
+import { SavedRecipesProvider } from './contexts/SavedRecipesContext';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/create-recipe" element={<CreateRecipe />} />
-        <Route path="/recipe-results" element={<RecipeResults />} />
-        <Route path="/saved-recipes" element={<SavedRecipes />} />
-      </Routes>
-    </Router>
+    <SavedRecipesProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/create-recipe" element={<CreateRecipe />} />
+          <Route path="/recipe-results" element={<RecipeResults />} />
+          <Route path="/saved-recipes" element={<SavedRecipes />} />
+        </Routes>
+      </Router>
+    </SavedRecipesProvider>
   );
 };
 

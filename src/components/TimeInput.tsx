@@ -19,7 +19,7 @@ const timeOptions: TimeOption[] = [
 ];
 
 interface TimeInputProps {
-  selectedTime: number | null;
+  selectedTime: number;
   onChange: (minutes: number | null) => void;
 }
 

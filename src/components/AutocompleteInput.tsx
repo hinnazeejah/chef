@@ -5,7 +5,7 @@ import { XCircleIcon } from '@heroicons/react/24/outline';
 interface AutocompleteInputProps {
   value: string;
   onChange: (value: string) => void;
-  placeholder: string;
+  placeholder?: string;
   className?: string;
 }
 
