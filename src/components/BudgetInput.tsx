@@ -25,7 +25,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ value, onChange }) => {
     <div className="space-y-3">
       <div className="flex items-center gap-2">
         <label className="block text-dark font-semibold mb-2 text-lg">
-          Enter Your Budget
+          Enter Your Budget (Per Recipe)
         </label>
         <Tooltip content="Enter your budget to filter recipes that fit your needs">
           <QuestionMarkCircleIcon className="w-5 h-5 text-food-sage" />
@@ -44,6 +44,9 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ value, onChange }) => {
           className="w-full px-4 py-2 pl-8 bg-white rounded-xl border-2 border-food-orange/20 focus:border-food-orange focus:outline-none"
         />
       </div>
+      <p className="text-sm text-food-brown/60 mt-1">
+        Set a max budget for a single recipe. We'll find options within your range!
+      </p>
     </div>
   );
 };

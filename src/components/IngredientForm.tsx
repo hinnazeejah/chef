@@ -3,10 +3,13 @@ import AutocompleteInput from './AutocompleteInput';
 import TimeInput from './TimeInput';
 import KitchenTools from './KitchenTools';
 import BudgetInput from './BudgetInput';
+import { MagnifyingGlassIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
+import Tooltip from './Tooltip';
 
 interface DietaryPreference {
   id: string;
   label: string;
+  description?: string;
 }
 
 const dietaryPreferences: DietaryPreference[] = [
@@ -14,7 +17,17 @@ const dietaryPreferences: DietaryPreference[] = [
   { id: 'vegetarian', label: 'Vegetarian' },
   { id: 'vegan', label: 'Vegan' },
   { id: 'gluten-free', label: 'Gluten-Free' },
-  { id: 'dairy-free', label: 'Dairy-Free' }
+  { id: 'dairy-free', label: 'Dairy-Free' },
+  { 
+    id: 'halal', 
+    label: 'Halal',
+    description: 'No pork, alcohol, and only halal-certified meat.'
+  },
+  { 
+    id: 'kosher', 
+    label: 'Kosher',
+    description: 'Follows Jewish dietary laws, including meat and dairy separation.'
+  }
 ];
 
 interface IngredientFormProps {
@@ -34,10 +47,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
     
     if (ingredients.trim().length > 0) {
       completedSteps++;
-    }
-    
-    if (selectedAppliances.length > 0) {
-      completedSteps++;
+      completedSteps++; // Automatically complete appliances step
     }
     
     if (selectedTime !== null) {
@@ -53,7 +63,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
     }
     
     setCurrentStep(completedSteps);
-  }, [ingredients, selectedAppliances, selectedTime, selectedPreferences, budget]);
+  }, [ingredients, selectedTime, selectedPreferences, budget]);
 
   const togglePreference = (preferenceId: string): void => {
     if (preferenceId === 'none') {
@@ -73,7 +83,6 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     
-    // Validation
     if (!ingredients.trim()) {
       alert('Please enter some ingredients');
       return;
@@ -81,11 +90,6 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
     
     if (selectedTime === null) {
       alert('Please select a cooking time');
-      return;
-    }
-    
-    if (selectedAppliances.length === 0) {
-      alert('Please select at least one appliance');
       return;
     }
 
@@ -97,6 +101,23 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
       selectedAppliances,
       typeof budget === 'number' ? budget : null
     );
+  };
+
+  const isSectionEnabled = (section: 'ingredients' | 'appliances' | 'time' | 'preferences' | 'budget'): boolean => {
+    switch (section) {
+      case 'ingredients':
+        return true;
+      case 'appliances':
+        return ingredients.trim().length > 0;
+      case 'time':
+        return ingredients.trim().length > 0;
+      case 'preferences':
+        return ingredients.trim().length > 0 && selectedTime !== null;
+      case 'budget':
+        return ingredients.trim().length > 0 && selectedTime !== null && selectedPreferences.length > 0;
+      default:
+        return false;
+    }
   };
 
   return (
@@ -135,42 +156,64 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
           />
         </div>
 
-        <KitchenTools 
-          selectedAppliances={selectedAppliances}
-          onChange={setSelectedAppliances}
-        />
+        <div className={`transition-opacity duration-300 ${!isSectionEnabled('appliances') ? 'opacity-50 pointer-events-none' : ''}`}>
+          <KitchenTools 
+            selectedAppliances={selectedAppliances}
+            onChange={setSelectedAppliances}
+          />
+        </div>
 
-        <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
+        <div className={`transition-opacity duration-300 ${!isSectionEnabled('time') ? 'opacity-50 pointer-events-none' : ''}`}>
+          <TimeInput selectedTime={selectedTime} onChange={setSelectedTime} />
+        </div>
 
-        <div>
+        <div className={`transition-opacity duration-300 ${!isSectionEnabled('preferences') ? 'opacity-50 pointer-events-none' : ''}`}>
           <label className="block text-dark font-semibold mb-3 text-lg">
             Dietary Preferences
           </label>
           <div className="flex flex-wrap gap-2">
             {dietaryPreferences.map(preference => (
-              <button
-                key={preference.id}
-                type="button"
-                onClick={() => togglePreference(preference.id)}
-                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
-                  selectedPreferences.includes(preference.id)
-                    ? 'bg-primary text-white shadow-md hover:bg-primary-light'
-                    : 'bg-neutral text-dark border-2 border-primary/10 hover:border-primary'
-                }`}
-              >
-                {preference.label}
-              </button>
+              <div key={preference.id} className="flex items-center">
+                <button
+                  type="button"
+                  onClick={() => togglePreference(preference.id)}
+                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                    selectedPreferences.includes(preference.id)
+                      ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
+                      : 'bg-neutral text-dark border-2 border-food-orange/10 hover:border-food-orange'
+                  }`}
+                >
+                  {preference.label}
+                </button>
+                {preference.description && (
+                  <Tooltip content={preference.description}>
+                    <InformationCircleIcon className="w-4 h-4 ml-1 text-food-brown/60 hover:text-food-orange cursor-help" />
+                  </Tooltip>
+                )}
+              </div>
             ))}
           </div>
         </div>
 
-        <BudgetInput value={budget} onChange={setBudget} />
+        <div className={`transition-opacity duration-300 ${!isSectionEnabled('budget') ? 'opacity-50 pointer-events-none' : ''}`}>
+          <BudgetInput value={budget} onChange={setBudget} />
+        </div>
 
         <button
           type="submit"
-          className="w-full py-4 px-6 bg-primary text-white rounded-xl font-semibold text-lg shadow-lg hover:bg-primary-light transition-all duration-200 hover:-translate-y-0.5 focus:ring-4 focus:ring-primary/20"
+          className="group w-full py-4 px-6 bg-primary text-white rounded-xl font-bold text-lg shadow-lg 
+            hover:bg-primary-light transition-all duration-300 hover:-translate-y-0.5 
+            focus:ring-4 focus:ring-primary/20 relative overflow-hidden"
         >
-          Find Recipes
+          <div className="flex items-center justify-center gap-2">
+            <MagnifyingGlassIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+            <span className="group-hover:tracking-wide transition-all duration-300">
+              Find Recipes
+            </span>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-food-orange/0 via-white/10 to-food-orange/0 
+            group-hover:translate-x-full -translate-x-full transition-transform duration-1000">
+          </div>
         </button>
       </form>
     </div>

@@ -34,13 +34,18 @@ const TimeInput: React.FC<TimeInputProps> = ({ selectedTime, onChange }) => {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2">
-        <label className="block text-dark font-semibold mb-2 text-lg">
-          How much time do you have?
-        </label>
-        <Tooltip content="Filter recipes by your schedule!">
-          <ClockIcon className="w-5 h-5 text-food-sage" />
-        </Tooltip>
+      <div className="space-y-1">
+        <div className="flex items-center gap-2">
+          <label className="block text-dark font-semibold text-lg">
+            How much time do you have?
+          </label>
+          <Tooltip content="Filter recipes by your schedule!">
+            <ClockIcon className="w-5 h-5 text-food-sage" />
+          </Tooltip>
+        </div>
+        <p className="text-sm text-food-brown/60">
+          Includes prep & cook time. Choose what works for you!
+        </p>
       </div>
       
       <div className="flex flex-wrap gap-2">
