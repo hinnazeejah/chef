@@ -76,6 +76,7 @@ const SavedRecipes: React.FC = () => {
                 key={recipe.id} 
                 recipe={recipe} 
                 onViewRecipe={handleViewRecipe}
+                showDietaryTags={false}
               />
             ))}
           </div>

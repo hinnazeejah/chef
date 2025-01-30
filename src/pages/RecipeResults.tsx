@@ -6,9 +6,12 @@ import {
   HeartIcon, 
   ClockIcon,
   CurrencyDollarIcon,
-  BeakerIcon
+  BeakerIcon,
+  BookmarkIcon as BookmarkOutline
 } from '@heroicons/react/24/outline';
+import { BookmarkIcon as BookmarkSolid } from '@heroicons/react/24/solid';
 import chefIcon from '../assets/icons/stir-fry.png';
+import { useSavedRecipes } from '../contexts/SavedRecipesContext';
 
 interface LocationState {
   userIngredients: string[];
@@ -21,6 +24,7 @@ interface LocationState {
 const RecipeResults: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { saveRecipe, removeRecipe, isSaved } = useSavedRecipes();
 
   // Add this useEffect to scroll to top on component mount
   React.useEffect(() => {
@@ -247,6 +251,29 @@ const RecipeResults: React.FC = () => {
                   className="w-full h-64 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                
+                {/* Save Button */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (isSaved(recipe.id)) {
+                      removeRecipe(recipe.id);
+                    } else {
+                      saveRecipe({
+                        ...recipe,
+                        missingIngredients: [],
+                        totalCost: recipe.estimatedCost || 0
+                      });
+                    }
+                  }}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-white/90 backdrop-blur-sm hover:bg-white transition-colors duration-200 hover:scale-105 shadow-md"
+                >
+                  {isSaved(recipe.id) ? (
+                    <BookmarkSolid className="w-5 h-5 text-food-orange" />
+                  ) : (
+                    <BookmarkOutline className="w-5 h-5 text-food-orange" />
+                  )}
+                </button>
                 
                 <div className="absolute inset-x-4 bottom-4 flex justify-between items-end">
                   <h3 className="text-xl font-semibold text-white max-w-[60%] leading-tight">
