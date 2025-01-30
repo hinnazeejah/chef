@@ -153,13 +153,16 @@ const RecipeResults: React.FC = () => {
                 <img 
                   src={ingredientsIcon}
                   alt="Ingredients"
-                  className="w-5 h-5 text-food-orange"
+                  className="w-5 h-5 filter-[#FF6B6B]"
                 />
                 <h3 className="font-medium text-food-brown">Your Ingredients</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {userIngredients.map((ingredient, index) => (
-                  <span key={index} className="px-3 py-1 bg-food-cream rounded-full text-sm text-food-brown/80">
+                  <span 
+                    key={index} 
+                    className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange"
+                  >
                     {ingredient}
                   </span>
                 ))}
@@ -172,12 +175,12 @@ const RecipeResults: React.FC = () => {
                 <img 
                   src={mealtypeIcon}
                   alt="Meal Type"
-                  className="w-5 h-5 text-food-orange"
+                  className="w-5 h-5 filter-[#FF6B6B]"
                 />
                 <h3 className="font-medium text-food-brown">Meal Type</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-food-cream rounded-full text-sm text-food-brown/80">
+                <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange">
                   {selectedMealType 
                     ? selectedMealType.charAt(0).toUpperCase() + selectedMealType.slice(1)
                     : 'Any Meal'}
@@ -191,14 +194,17 @@ const RecipeResults: React.FC = () => {
                 <img 
                   src={kitchentoolsIcon}
                   alt="Kitchen Tools"
-                  className="w-5 h-5 text-food-orange"
+                  className="w-5 h-5 filter-[#FF6B6B]"
                 />
                 <h3 className="font-medium text-food-brown">Kitchen Tools</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {appliances.length > 0 ? (
                   appliances.map((appliance, index) => (
-                    <span key={`app-${index}`} className="px-3 py-1 bg-food-cream rounded-full text-sm text-food-brown/80">
+                    <span 
+                      key={`app-${index}`} 
+                      className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange"
+                    >
                       {appliance}
                     </span>
                   ))
@@ -214,7 +220,7 @@ const RecipeResults: React.FC = () => {
                 <img 
                   src={preferencesIcon}
                   alt="Preferences"
-                  className="w-5 h-5 text-food-orange"
+                  className="w-5 h-5 filter-[#FF6B6B]"
                 />
                 <h3 className="font-medium text-food-brown">Preferences</h3>
               </div>
@@ -233,7 +239,7 @@ const RecipeResults: React.FC = () => {
                 <img 
                   src={timeandbudgetIcon}
                   alt="Time and Budget"
-                  className="w-5 h-5 text-food-orange"
+                  className="w-5 h-5 filter-[#FF6B6B]"
                 />
                 <h3 className="font-medium text-food-brown">Time & Budget</h3>
               </div>
@@ -242,7 +248,7 @@ const RecipeResults: React.FC = () => {
                   <img 
                     src={timeIcon}
                     alt="Time"
-                    className="w-4 h-4 text-food-orange/60"
+                    className="w-4 h-4 filter-[#FF6B6B]"
                   />
                   <span className="text-sm text-food-brown">{timeLimit} minutes</span>
                 </div>
@@ -250,7 +256,7 @@ const RecipeResults: React.FC = () => {
                   <img 
                     src={budgetIcon}
                     alt="Budget"
-                    className="w-4 h-4 text-food-orange/60"
+                    className="w-4 h-4 filter-[#FF6B6B]"
                   />
                   <span className="text-sm text-food-brown">Under ${budget}</span>
                 </div>
