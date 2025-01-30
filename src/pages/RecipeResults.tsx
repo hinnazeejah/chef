@@ -2,17 +2,18 @@ import React from 'react';
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { 
-  ShoppingBagIcon, 
-  HeartIcon, 
-  ClockIcon,
-  CurrencyDollarIcon,
-  BeakerIcon,
-  BookmarkIcon as BookmarkOutline,
-  CalendarIcon
+  BookmarkIcon as BookmarkOutline
 } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolid } from '@heroicons/react/24/solid';
 import chefIcon from '../assets/icons/stir-fry.png';
 import { useSavedRecipes } from '../contexts/SavedRecipesContext';
+import ingredientsIcon from '../assets/icons/ingredients.png';
+import mealtypeIcon from '../assets/icons/mealtype.png';
+import kitchentoolsIcon from '../assets/icons/kitchentools.png';
+import preferencesIcon from '../assets/icons/preferences.png';
+import timeandbudgetIcon from '../assets/icons/timeandbudget.png';
+import timeIcon from '../assets/icons/time.png';
+import budgetIcon from '../assets/icons/budget.png';
 
 interface LocationState {
   userIngredients: string[];
@@ -149,7 +150,11 @@ const RecipeResults: React.FC = () => {
             {/* Ingredients Card */}
             <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <ShoppingBagIcon className="w-5 h-5 text-food-orange" />
+                <img 
+                  src={ingredientsIcon}
+                  alt="Ingredients"
+                  className="w-5 h-5 text-food-orange"
+                />
                 <h3 className="font-medium text-food-brown">Your Ingredients</h3>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -164,7 +169,11 @@ const RecipeResults: React.FC = () => {
             {/* Meal Type Card */}
             <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <CalendarIcon className="w-5 h-5 text-food-orange" />
+                <img 
+                  src={mealtypeIcon}
+                  alt="Meal Type"
+                  className="w-5 h-5 text-food-orange"
+                />
                 <h3 className="font-medium text-food-brown">Meal Type</h3>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -179,7 +188,11 @@ const RecipeResults: React.FC = () => {
             {/* Appliances Card */}
             <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <BeakerIcon className="w-5 h-5 text-food-orange" />
+                <img 
+                  src={kitchentoolsIcon}
+                  alt="Kitchen Tools"
+                  className="w-5 h-5 text-food-orange"
+                />
                 <h3 className="font-medium text-food-brown">Kitchen Tools</h3>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -198,7 +211,11 @@ const RecipeResults: React.FC = () => {
             {/* Preferences Card */}
             <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <HeartIcon className="w-5 h-5 text-food-orange" />
+                <img 
+                  src={preferencesIcon}
+                  alt="Preferences"
+                  className="w-5 h-5 text-food-orange"
+                />
                 <h3 className="font-medium text-food-brown">Preferences</h3>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -213,16 +230,28 @@ const RecipeResults: React.FC = () => {
             {/* Time & Budget Card */}
             <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <ClockIcon className="w-5 h-5 text-food-orange" />
+                <img 
+                  src={timeandbudgetIcon}
+                  alt="Time and Budget"
+                  className="w-5 h-5 text-food-orange"
+                />
                 <h3 className="font-medium text-food-brown">Time & Budget</h3>
               </div>
               <div className="flex flex-wrap gap-3">
                 <div className="flex items-center gap-2">
-                  <ClockIcon className="w-4 h-4 text-food-orange/60" />
+                  <img 
+                    src={timeIcon}
+                    alt="Time"
+                    className="w-4 h-4 text-food-orange/60"
+                  />
                   <span className="text-sm text-food-brown">{timeLimit} minutes</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CurrencyDollarIcon className="w-4 h-4 text-food-orange/60" />
+                  <img 
+                    src={budgetIcon}
+                    alt="Budget"
+                    className="w-4 h-4 text-food-orange/60"
+                  />
                   <span className="text-sm text-food-brown">Under ${budget}</span>
                 </div>
               </div>
