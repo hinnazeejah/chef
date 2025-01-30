@@ -7,7 +7,8 @@ import {
   ClockIcon,
   CurrencyDollarIcon,
   BeakerIcon,
-  BookmarkIcon as BookmarkOutline
+  BookmarkIcon as BookmarkOutline,
+  CalendarIcon
 } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolid } from '@heroicons/react/24/solid';
 import chefIcon from '../assets/icons/stir-fry.png';
@@ -19,6 +20,7 @@ interface LocationState {
   appliances: string[];
   timeLimit: number;
   budget: number;
+  selectedMealType: string;
 }
 
 const RecipeResults: React.FC = () => {
@@ -35,7 +37,7 @@ const RecipeResults: React.FC = () => {
     return <Navigate to="/" replace />;
   }
 
-  const { userIngredients, preferences, appliances, timeLimit, budget } = 
+  const { userIngredients, preferences, appliances, timeLimit, budget, selectedMealType } = 
     location.state as LocationState;
 
   // Extended mock recipes to fill 3x3 grid
@@ -143,7 +145,7 @@ const RecipeResults: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-8">
             {/* Ingredients Card */}
             <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
@@ -156,6 +158,21 @@ const RecipeResults: React.FC = () => {
                     {ingredient}
                   </span>
                 ))}
+              </div>
+            </div>
+
+            {/* Meal Type Card */}
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+              <div className="flex items-center gap-2 mb-3">
+                <CalendarIcon className="w-5 h-5 text-food-orange" />
+                <h3 className="font-medium text-food-brown">Meal Type</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-food-cream rounded-full text-sm text-food-brown/80">
+                  {selectedMealType 
+                    ? selectedMealType.charAt(0).toUpperCase() + selectedMealType.slice(1)
+                    : 'Any Meal'}
+                </span>
               </div>
             </div>
 

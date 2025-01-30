@@ -3,23 +3,19 @@ import AutocompleteInput from './AutocompleteInput';
 import TimeInput from './TimeInput';
 import KitchenTools from './KitchenTools';
 import BudgetInput from './BudgetInput';
-import { MagnifyingGlassIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
-import Tooltip from './Tooltip';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-interface DietaryPreference {
+interface MealType {
   id: string;
   label: string;
-  description?: string;
+  icon?: string;
 }
 
-const dietaryPreferences: DietaryPreference[] = [
-  { id: 'none', label: 'None' },
-  { id: 'vegetarian', label: 'Vegetarian' },
-  { id: 'vegan', label: 'Vegan' },
-  { id: 'gluten-free', label: 'Gluten-Free' },
-  { id: 'dairy-free', label: 'Dairy-Free' },
-  { id: 'halal', label: 'Halal' },
-  { id: 'kosher', label: 'Kosher' }
+const mealTypes: MealType[] = [
+  { id: 'breakfast', label: 'Breakfast' },
+  { id: 'lunch', label: 'Lunch' },
+  { id: 'dinner', label: 'Dinner' },
+  { id: 'any', label: 'Any Meal' }
 ];
 
 interface IngredientFormProps {
@@ -28,7 +24,8 @@ interface IngredientFormProps {
     preferences: string[],
     appliances: string[],
     timeLimit: number,
-    budget: number
+    budget: number,
+    mealType: string
   ) => void;
 }
 
@@ -40,13 +37,21 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const [timeLimit, setTimeLimit] = useState<number | null>(null);
   const [budget, setBudget] = useState<number | ''>(0);
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const [selectedMealType, setSelectedMealType] = useState<string>('any');
 
   useEffect(() => {
     let completedSteps = 0;
     
     if (ingredientsList.length > 0) {
       completedSteps++;
-      completedSteps++; // Automatically complete appliances step
+    }
+    
+    if (selectedMealType !== '') {
+      completedSteps++;
+    }
+    
+    if (appliances.length > 0) {
+      completedSteps++;
     }
     
     if (timeLimit !== null) {
@@ -62,26 +67,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
     }
     
     setCurrentStep(completedSteps);
-  }, [ingredientsList, timeLimit, preferences, budget]);
-
-  const togglePreference = (preferenceId: string): void => {
-    if (preferenceId === 'none') {
-      setPreferences(['none']);
-      return;
-    }
-    
-    setPreferences((prev: string[]) => {
-      if (prev.includes('none')) {
-        return [preferenceId];
-      }
-      
-      if (prev.includes(preferenceId)) {
-        return prev.filter(id => id !== preferenceId);
-      } else {
-        return [...prev, preferenceId];
-      }
-    });
-  };
+  }, [ingredientsList, selectedMealType, appliances, timeLimit, preferences, budget]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -92,7 +78,8 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
       preferences,
       appliances,
       timeLimit,
-      budget || 0
+      budget as number,
+      selectedMealType
     );
   };
 
@@ -101,18 +88,20 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
     setIngredientsList(value.split(',').map(i => i.trim()).filter(i => i));
   };
 
-  const isSectionEnabled = (section: 'ingredients' | 'appliances' | 'time' | 'preferences' | 'budget'): boolean => {
+  const isSectionEnabled = (section: 'ingredients' | 'mealType' | 'appliances' | 'time' | 'preferences' | 'budget'): boolean => {
     switch (section) {
       case 'ingredients':
         return true;
+      case 'mealType':
+        return ingredientsList.length > 0;
       case 'appliances':
-        return ingredientsList.length > 0;
+        return ingredientsList.length > 0 && selectedMealType !== '';
       case 'time':
-        return ingredientsList.length > 0;
+        return ingredientsList.length > 0 && selectedMealType !== '';
       case 'preferences':
-        return ingredientsList.length > 0 && timeLimit !== null;
+        return ingredientsList.length > 0 && selectedMealType !== '' && timeLimit !== null;
       case 'budget':
-        return ingredientsList.length > 0 && timeLimit !== null && preferences.length > 0;
+        return ingredientsList.length > 0 && selectedMealType !== '' && timeLimit !== null && preferences.length > 0;
       default:
         return false;
     }
@@ -128,6 +117,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
       <div className="mb-8">
         <div className="flex justify-between mb-2 text-xs text-food-brown/60">
           <span>Ingredients</span>
+          <span>Meal Type</span>
           <span>Appliances</span>
           <span>Time</span>
           <span>Preferences</span>
@@ -154,6 +144,28 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
           />
         </div>
 
+        <div className={`transition-opacity duration-300 ${!isSectionEnabled('mealType') ? 'opacity-50 pointer-events-none' : ''}`}>
+          <label className="block text-dark font-semibold mb-3 text-lg">
+            What type of meal are you looking for?
+          </label>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {mealTypes.map(mealType => (
+              <button
+                key={mealType.id}
+                type="button"
+                onClick={() => setSelectedMealType(mealType.id)}
+                className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 
+                  ${selectedMealType === mealType.id
+                    ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
+                    : 'bg-white border-2 border-food-orange/20 hover:border-food-orange text-food-brown'
+                  }`}
+              >
+                {mealType.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className={`transition-opacity duration-300 ${!isSectionEnabled('appliances') ? 'opacity-50 pointer-events-none' : ''}`}>
           <KitchenTools 
             selectedAppliances={appliances}
@@ -170,54 +182,44 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
 
         <div className={`transition-opacity duration-300 ${!isSectionEnabled('preferences') ? 'opacity-50 pointer-events-none' : ''}`}>
           <label className="block text-dark font-semibold mb-3 text-lg">
-            Dietary Preferences
+            Any dietary preferences?
           </label>
-          <div className="flex flex-wrap gap-2">
-            {dietaryPreferences.map(preference => (
-              <div key={preference.id} className="flex items-center">
-                <button
-                  type="button"
-                  onClick={() => togglePreference(preference.id)}
-                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
-                    preferences.includes(preference.id)
-                      ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
-                      : 'bg-neutral text-dark border-2 border-food-orange/10 hover:border-food-orange'
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { id: 'none', label: 'None' },
+              { id: 'vegetarian', label: 'Vegetarian' },
+              { id: 'vegan', label: 'Vegan' },
+              { id: 'gluten-free', label: 'Gluten-Free' }
+            ].map(pref => (
+              <button
+                key={pref.id}
+                type="button"
+                onClick={() => setPreferences([pref.id])}
+                className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 
+                  ${preferences.includes(pref.id)
+                    ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
+                    : 'bg-white border-2 border-food-orange/20 hover:border-food-orange text-food-brown'
                   }`}
-                >
-                  {preference.label}
-                </button>
-                {preference.description && (
-                  <Tooltip content={preference.description}>
-                    <InformationCircleIcon className="w-4 h-4 ml-1 text-food-brown/60 hover:text-food-orange cursor-help" />
-                  </Tooltip>
-                )}
-              </div>
+              >
+                {pref.label}
+              </button>
             ))}
           </div>
         </div>
 
         <div className={`transition-opacity duration-300 ${!isSectionEnabled('budget') ? 'opacity-50 pointer-events-none' : ''}`}>
           <BudgetInput 
-            value={budget} 
+            value={budget}
             onChange={(value: number | '') => setBudget(value)}
           />
         </div>
 
-        <button
-          type="submit"
-          className="group w-full py-4 px-6 bg-primary text-white rounded-xl font-bold text-lg shadow-lg 
-            hover:bg-primary-light transition-all duration-300 hover:-translate-y-0.5 
-            focus:ring-4 focus:ring-primary/20 relative overflow-hidden"
+        <button 
+          type="submit" 
+          className="w-full bg-food-orange text-white px-4 py-3 rounded-xl text-lg font-semibold hover:bg-food-orange/90 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 flex items-center justify-center gap-2"
         >
-          <div className="flex items-center justify-center gap-2">
-            <MagnifyingGlassIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
-            <span className="group-hover:tracking-wide transition-all duration-300">
-              Find Recipes
-            </span>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-food-orange/0 via-white/10 to-food-orange/0 
-            group-hover:translate-x-full -translate-x-full transition-transform duration-1000">
-          </div>
+          <span>Find Recipes</span>
+          <MagnifyingGlassIcon className="w-5 h-5" />
         </button>
       </form>
     </div>
