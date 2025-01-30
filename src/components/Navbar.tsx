@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <img src={chefIcon} alt="Chef Icon" className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
-            <span className="text-xl sm:text-2xl font-bold text-primary">
+            <span className="text-2xl sm:text-3xl md:text-4xl font-cinderela text-food-orange">
               ReciPal
             </span>
           </Link>
