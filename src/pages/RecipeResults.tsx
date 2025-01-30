@@ -244,22 +244,22 @@ const RecipeResults: React.FC = () => {
                 <h3 className="font-medium text-food-brown">Time & Budget</h3>
               </div>
               <div className="flex flex-wrap gap-3">
-                <div className="flex items-center gap-2">
+                <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange flex items-center gap-2">
                   <img 
                     src={timeIcon}
                     alt="Time"
                     className="w-4 h-4 filter-[#FF6B6B]"
                   />
-                  <span className="text-sm text-food-brown">{timeLimit} minutes</span>
-                </div>
-                <div className="flex items-center gap-2">
+                  {timeLimit} minutes
+                </span>
+                <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange flex items-center gap-2">
                   <img 
                     src={budgetIcon}
                     alt="Budget"
                     className="w-4 h-4 filter-[#FF6B6B]"
                   />
-                  <span className="text-sm text-food-brown">Under ${budget}</span>
-                </div>
+                  Under ${budget}
+                </span>
               </div>
             </div>
           </div>
