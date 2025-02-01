@@ -146,167 +146,179 @@ const RecipeResults: React.FC = () => {
     <>
       <Navbar />
       <main className="container mx-auto pt-32 px-6 md:px-8 lg:px-6">
-        {/* Search Summary Section */}
-        <div className="mb-12">
-          <div className="relative mb-8">
-            <div className="flex items-center justify-center gap-3">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-cinderela font-normal text-food-orange relative">
-                Your Search
-              </h2>
+        {/* Desktop View - Search Summary Section */}
+        <div className="hidden md:block">
+          <div className="mb-12">
+            <div className="relative mb-8">
+              <div className="flex items-center justify-center gap-3">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-cinderela font-normal text-food-orange relative">
+                  Your Search
+                </h2>
+              </div>
+              <p className="text-center text-food-brown/60 mt-2">
+                Here's what we found based on your preferences
+              </p>
+              <div className="absolute inset-x-0 -bottom-4">
+                <div className="h-px bg-gradient-to-r from-transparent via-food-orange/20 to-transparent" />
+              </div>
             </div>
-            <p className="text-center text-food-brown/60 mt-2">
-              Here's what we found based on your preferences
-            </p>
-            <div className="absolute inset-x-0 -bottom-4">
-              <div className="h-px bg-gradient-to-r from-transparent via-food-orange/20 to-transparent" />
-            </div>
-          </div>
 
-          <motion.div 
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-8"
-          >
-            {/* Ingredients Card */}
-            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
-              <div className="flex items-center gap-2 mb-3">
-                <img 
-                  src={ingredientsIcon}
-                  alt="Ingredients"
-                  className="w-5 h-5 filter-[#FF6B6B]"
-                />
-                <h3 className="font-medium text-food-brown">Your Ingredients</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {userIngredients.map((ingredient, index) => (
-                  <span 
-                    key={index} 
-                    className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange"
-                  >
-                    {ingredient}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Meal Type Card */}
-            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
-              <div className="flex items-center gap-2 mb-3">
-                <img 
-                  src={mealtypeIcon}
-                  alt="Meal Type"
-                  className="w-5 h-5 filter-[#FF6B6B]"
-                />
-                <h3 className="font-medium text-food-brown">Meal Type</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange">
-                  {selectedMealType 
-                    ? selectedMealType.charAt(0).toUpperCase() + selectedMealType.slice(1)
-                    : 'Any Meal'}
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Appliances Card */}
-            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
-              <div className="flex items-center gap-2 mb-3">
-                <img 
-                  src={kitchentoolsIcon}
-                  alt="Kitchen Tools"
-                  className="w-5 h-5 filter-[#FF6B6B]"
-                />
-                <h3 className="font-medium text-food-brown">Kitchen Tools</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {appliances.length > 0 ? (
-                  appliances.map((appliance, index) => (
+            <motion.div 
+              variants={container}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-8"
+            >
+              {/* Ingredients Card */}
+              <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <img 
+                    src={ingredientsIcon}
+                    alt="Ingredients"
+                    className="w-5 h-5 filter-[#FF6B6B]"
+                  />
+                  <h3 className="font-medium text-food-brown">Your Ingredients</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {userIngredients.map((ingredient, index) => (
                     <span 
-                      key={`app-${index}`} 
+                      key={index} 
                       className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange"
                     >
-                      {appliance}
+                      {ingredient}
                     </span>
-                  ))
-                ) : (
-                  <span className="text-sm text-food-brown/60">All appliances considered</span>
-                )}
-              </div>
-            </motion.div>
+                  ))}
+                </div>
+              </motion.div>
 
-            {/* Preferences Card */}
-            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
-              <div className="flex items-center gap-2 mb-3">
-                <img 
-                  src={preferencesIcon}
-                  alt="Preferences"
-                  className="w-5 h-5 filter-[#FF6B6B]"
-                />
-                <h3 className="font-medium text-food-brown">Preferences</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {preferences.map((pref, index) => (
-                  <span key={`pref-${index}`} className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange">
-                    {pref}
+              {/* Meal Type Card */}
+              <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <img 
+                    src={mealtypeIcon}
+                    alt="Meal Type"
+                    className="w-5 h-5 filter-[#FF6B6B]"
+                  />
+                  <h3 className="font-medium text-food-brown">Meal Type</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange">
+                    {selectedMealType 
+                      ? selectedMealType.charAt(0).toUpperCase() + selectedMealType.slice(1)
+                      : 'Any Meal'}
                   </span>
-                ))}
-              </div>
-            </motion.div>
+                </div>
+              </motion.div>
 
-            {/* Time & Budget Card */}
-            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
-              <div className="flex items-center gap-2 mb-3">
-                <img 
-                  src={timeandbudgetIcon}
-                  alt="Time and Budget"
-                  className="w-5 h-5 filter-[#FF6B6B]"
-                />
-                <h3 className="font-medium text-food-brown">Time & Budget</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange flex items-center gap-2">
+              {/* Appliances Card */}
+              <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
                   <img 
-                    src={timeIcon}
-                    alt="Time"
-                    className="w-4 h-4 filter-[#FF6B6B]"
+                    src={kitchentoolsIcon}
+                    alt="Kitchen Tools"
+                    className="w-5 h-5 filter-[#FF6B6B]"
                   />
-                  {timeLimit} minutes
-                </span>
-                <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange flex items-center gap-2">
-                  <img 
-                    src={budgetIcon}
-                    alt="Budget"
-                    className="w-4 h-4 filter-[#FF6B6B]"
-                  />
-                  Under ${budget}
-                </span>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
+                  <h3 className="font-medium text-food-brown">Kitchen Tools</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {appliances.length > 0 ? (
+                    appliances.map((appliance, index) => (
+                      <span 
+                        key={`app-${index}`} 
+                        className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange"
+                      >
+                        {appliance}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-sm text-food-brown/60">All appliances considered</span>
+                  )}
+                </div>
+              </motion.div>
 
-        {/* Decorative Divider */}
-        <div className="relative my-12">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-food-orange/10"></div>
+              {/* Preferences Card */}
+              <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <img 
+                    src={preferencesIcon}
+                    alt="Preferences"
+                    className="w-5 h-5 filter-[#FF6B6B]"
+                  />
+                  <h3 className="font-medium text-food-brown">Preferences</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {preferences.map((pref, index) => (
+                    <span key={`pref-${index}`} className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange">
+                      {pref}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Time & Budget Card */}
+              <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <img 
+                    src={timeandbudgetIcon}
+                    alt="Time and Budget"
+                    className="w-5 h-5 filter-[#FF6B6B]"
+                  />
+                  <h3 className="font-medium text-food-brown">Time & Budget</h3>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange flex items-center gap-2">
+                    <img 
+                      src={timeIcon}
+                      alt="Time"
+                      className="w-4 h-4 filter-[#FF6B6B]"
+                    />
+                    {timeLimit} minutes
+                  </span>
+                  <span className="px-3 py-1 bg-food-orange/10 rounded-full text-sm text-food-orange flex items-center gap-2">
+                    <img 
+                      src={budgetIcon}
+                      alt="Budget"
+                      className="w-4 h-4 filter-[#FF6B6B]"
+                    />
+                    Under ${budget}
+                  </span>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
-          <div className="relative flex justify-center">
-            <div className="bg-gradient-to-r from-transparent via-white to-transparent px-12">
-              <div className="bg-food-cream/30 p-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <img 
-                  src={chefIcon}
-                  alt="Stir fry icon" 
-                  className="w-8 h-8 object-contain"
-                />
+
+          {/* Decorative Divider - Only show on desktop */}
+          <div className="relative my-12">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-food-orange/10"></div>
+            </div>
+            <div className="relative flex justify-center">
+              <div className="bg-gradient-to-r from-transparent via-white to-transparent px-12">
+                <div className="bg-food-cream/30 p-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
+                  <img 
+                    src={chefIcon}
+                    alt="Stir fry icon" 
+                    className="w-8 h-8 object-contain"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Recipe Results Section */}
-        <div>
-          <div className="flex items-center gap-3 mb-8 px-2 md:px-0">
+        {/* Mobile View - Only Recipe Suggestions */}
+        <div className="md:hidden text-center mb-12">
+          <h2 className="text-3xl font-cinderela text-food-orange mb-2">
+            Recipe Suggestions
+          </h2>
+          <span className="inline-block px-3 py-1 bg-food-orange/10 rounded-full text-food-orange/80 text-base font-medium">
+            {mockRecipes.length} Recipes Found
+          </span>
+        </div>
+
+        {/* Recipe Results Section - Shown on both mobile and desktop */}
+        <div className="md:block">
+          <div className="hidden md:flex items-center gap-3 mb-8 px-2 md:px-0">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-cinderela font-normal text-food-orange">
               Recipe Suggestions
             </h2>

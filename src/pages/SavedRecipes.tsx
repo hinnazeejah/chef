@@ -56,7 +56,18 @@ const SavedRecipes: React.FC = () => {
       <Navbar />
       <div className="min-h-screen pt-32 px-6">
         <div className="container mx-auto">
-          <div className="text-center mb-10">
+          {/* Mobile View */}
+          <div className="md:hidden text-center mb-12">
+            <h2 className="text-3xl font-cinderela text-food-orange mb-2">
+              Saved Recipes
+            </h2>
+            <span className="inline-block px-3 py-1 bg-food-orange/10 rounded-full text-food-orange/80 text-base font-medium">
+              {savedRecipes.length} Recipes Saved
+            </span>
+          </div>
+
+          {/* Desktop View */}
+          <div className="hidden md:block text-center mb-10">
             <div className="relative inline-block">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-cinderela font-normal text-food-orange mb-2 tracking-tight">
                 Saved Recipes
