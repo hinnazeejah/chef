@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import hi from '../assets/icons/hi.png';
+import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
@@ -25,8 +26,12 @@ const Hero: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-center md:justify-start container mx-auto px-6 md:pl-4 lg:pl-8">
-        {/* Text Content */}
-        <div className="text-center md:text-left max-w-2xl mt-24 md:mt-0">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center md:text-left max-w-2xl mt-24 md:mt-0"
+        >
           <h1 className="flex flex-col gap-2 md:gap-4">
             <span className="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-food-brown/90 drop-shadow-sm tracking-tight">
               Turn Your Ingredients Into
@@ -49,7 +54,7 @@ const Hero: React.FC = () => {
             Get Started
             <ChevronRightIcon className="w-6 h-6 inline-block ml-2" />
           </button>
-        </div>
+        </motion.div>
 
         {/* Hero Image */}
         <div className="relative md:absolute md:right-[10%] md:top-1/2 md:transform md:-translate-y-1/2 

@@ -14,6 +14,7 @@ import preferencesIcon from '../assets/icons/preferences.png';
 import timeandbudgetIcon from '../assets/icons/timeandbudget.png';
 import timeIcon from '../assets/icons/time.png';
 import budgetIcon from '../assets/icons/budget.png';
+import { motion } from 'framer-motion';
 
 interface LocationState {
   userIngredients: string[];
@@ -23,6 +24,21 @@ interface LocationState {
   budget: number;
   selectedMealType: string;
 }
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+};
 
 const RecipeResults: React.FC = () => {
   const location = useLocation();
@@ -146,9 +162,14 @@ const RecipeResults: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-8">
+          <motion.div 
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-8"
+          >
             {/* Ingredients Card */}
-            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <img 
                   src={ingredientsIcon}
@@ -167,10 +188,10 @@ const RecipeResults: React.FC = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Meal Type Card */}
-            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <img 
                   src={mealtypeIcon}
@@ -186,10 +207,10 @@ const RecipeResults: React.FC = () => {
                     : 'Any Meal'}
                 </span>
               </div>
-            </div>
+            </motion.div>
 
             {/* Appliances Card */}
-            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <img 
                   src={kitchentoolsIcon}
@@ -212,10 +233,10 @@ const RecipeResults: React.FC = () => {
                   <span className="text-sm text-food-brown/60">All appliances considered</span>
                 )}
               </div>
-            </div>
+            </motion.div>
 
             {/* Preferences Card */}
-            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <img 
                   src={preferencesIcon}
@@ -231,10 +252,10 @@ const RecipeResults: React.FC = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Time & Budget Card */}
-            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
+            <motion.div variants={item} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <img 
                   src={timeandbudgetIcon}
@@ -261,8 +282,8 @@ const RecipeResults: React.FC = () => {
                   Under ${budget}
                 </span>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Decorative Divider */}

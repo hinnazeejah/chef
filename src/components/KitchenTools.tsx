@@ -30,25 +30,25 @@ const KitchenTools: React.FC<KitchenToolsProps> = ({ selectedAppliances, onChang
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {appliances.map(appliance => (
           <button
-            key={appliance.id}
-            type="button"
-            onClick={() => {
-              const newSelection = selectedAppliances.includes(appliance.id)
-                ? selectedAppliances.filter(id => id !== appliance.id)
-                : [...selectedAppliances, appliance.id];
-              onChange(newSelection);
-            }}
-            className={`w-full px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 flex items-center justify-between
-              ${selectedAppliances.includes(appliance.id)
-                ? 'bg-food-orange text-white shadow-md'
-                : 'bg-white border-2 border-food-orange/20 hover:border-food-orange text-food-brown'
-              }`}
-          >
-            {appliance.label}
-            {selectedAppliances.includes(appliance.id) && (
-              <CheckIcon className="w-5 h-5" />
-            )}
-          </button>
+          key={appliance.id}
+          type="button"
+          onClick={() => {
+            const newSelection = selectedAppliances.includes(appliance.id)
+              ? selectedAppliances.filter(id => id !== appliance.id)
+              : [...selectedAppliances, appliance.id];
+            onChange(newSelection);
+          }}
+          className={`w-full px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 flex items-center justify-between
+            ${selectedAppliances.includes(appliance.id)
+              ? 'bg-food-orange text-white shadow-md'
+              : 'bg-white border-2 border-food-orange/20 hover:border-food-orange text-food-brown'
+            }`}
+        >
+          {appliance.label}
+          {selectedAppliances.includes(appliance.id) && (
+            <CheckIcon className="w-5 h-5" />
+          )}
+        </button>
         ))}
       </div>
       <p className="text-sm text-food-brown/60 mt-2">

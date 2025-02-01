@@ -3,6 +3,7 @@ import { Recipe, RecipeDetails } from '../types';
 import { BookmarkIcon as BookmarkOutline } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolid } from '@heroicons/react/24/solid';
 import { useSavedRecipes } from '../contexts/SavedRecipesContext';
+import { motion } from 'framer-motion';
 
 interface RecipeCardProps {
   recipe: Recipe | RecipeDetails;
@@ -35,7 +36,13 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
+      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative"
+    >
       <img 
         src={recipe.image} 
         alt={recipe.title}
@@ -80,7 +87,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
           View Recipe
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
