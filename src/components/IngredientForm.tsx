@@ -164,7 +164,13 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
                   <button
                     key={mealType.id}
                     type="button"
-                    onClick={() => setSelectedMealType(mealType.id)}
+                    onClick={() => {
+                      if (selectedMealType === mealType.id) {
+                        setSelectedMealType('');
+                      } else {
+                        setSelectedMealType(mealType.id);
+                      }
+                    }}
                     className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 
                       ${selectedMealType === mealType.id
                         ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
@@ -297,7 +303,13 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
                   <button
                     key={pref.id}
                     type="button"
-                    onClick={() => setPreferences([pref.id])}
+                    onClick={() => {
+                      if (preferences.includes(pref.id)) {
+                        setPreferences([]);
+                      } else {
+                        setPreferences([pref.id]);
+                      }
+                    }}
                     className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 
                       ${preferences.includes(pref.id)
                         ? 'bg-food-orange text-white shadow-md hover:bg-food-orange/90'
