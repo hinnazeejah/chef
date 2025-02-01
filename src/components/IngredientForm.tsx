@@ -37,7 +37,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
   const [timeLimit, setTimeLimit] = useState<number | null>(null);
   const [budget, setBudget] = useState<number | ''>(0);
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const [selectedMealType, setSelectedMealType] = useState<string>('any');
+  const [selectedMealType, setSelectedMealType] = useState<string>('');
 
   useEffect(() => {
     let completedSteps = 0;
@@ -115,15 +115,15 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
       
       {/* New Progress Bar Style */}
       <div className="mb-8">
-        <div className="flex justify-between mb-2 text-xs text-food-brown/60">
-          <span>Ingredients</span>
-          <span>Meal Type</span>
-          <span>Appliances</span>
-          <span>Time</span>
-          <span>Preferences</span>
-          <span>Budget</span>
+        <div className="flex justify-between mb-2">
+          <span className="text-[10px] sm:text-xs text-food-brown/60">Ingredients</span>
+          <span className="text-[10px] sm:text-xs text-food-brown/60">Meal Type</span>
+          <span className="text-[10px] sm:text-xs text-food-brown/60">Appliances</span>
+          <span className="text-[10px] sm:text-xs text-food-brown/60">Time</span>
+          <span className="text-[10px] sm:text-xs text-food-brown/60">Preferences</span>
+          <span className="text-[10px] sm:text-xs text-food-brown/60">Budget</span>
         </div>
-        <div className="relative h-1 bg-food-cream rounded-full">
+        <div className="relative h-1 bg-food-cream rounded-full mt-1">
           <div 
             className="absolute left-0 top-0 h-full bg-gradient-to-r from-food-orange to-food-peach rounded-full transition-all duration-300"
             style={{ width: `${(currentStep / 5) * 100}%` }}
@@ -184,12 +184,14 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
           <label className="block text-dark font-semibold mb-3 text-lg">
             Any dietary preferences?
           </label>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {[
               { id: 'none', label: 'None' },
               { id: 'vegetarian', label: 'Vegetarian' },
               { id: 'vegan', label: 'Vegan' },
-              { id: 'gluten-free', label: 'Gluten-Free' }
+              { id: 'gluten-free', label: 'Gluten-Free' },
+              { id: 'kosher', label: 'Kosher' },
+              { id: 'halal', label: 'Halal' }
             ].map(pref => (
               <button
                 key={pref.id}
