@@ -18,11 +18,13 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <img src={chefIcon} alt="Chef Icon" className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
-            <span className="text-2xl sm:text-3xl md:text-4xl font-cinderela text-food-orange">
-              ReciPal
-            </span>
+          <Link to="/" className="flex items-center gap-2">
+            <img 
+              src={chefIcon} 
+              alt="ReciPal Logo" 
+              className="w-8 h-8 transform transition-transform duration-300 hover:rotate-12 hover:scale-110" 
+            />
+            <span className="text-3xl md:text-4xl font-cinderela text-food-orange">ReciPal</span>
           </Link>
 
           {/* Desktop Navigation */}
