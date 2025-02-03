@@ -329,52 +329,70 @@ const RecipeResults: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-2 md:px-0">
             {mockRecipes.map(recipe => (
-              <div key={recipe.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative">
-                <img 
-                  src={recipe.image} 
-                  alt={recipe.title}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                
-                {/* Save Button */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (isSaved(recipe.id)) {
-                      removeRecipe(recipe.id);
-                    } else {
-                      saveRecipe({
-                        ...recipe,
-                        missingIngredients: [],
-                        totalCost: recipe.estimatedCost || 0
-                      });
-                    }
-                  }}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-white/90 backdrop-blur-sm hover:bg-white transition-colors duration-200 hover:scale-105 shadow-md"
-                >
-                  {isSaved(recipe.id) ? (
-                    <BookmarkSolid className="w-5 h-5 text-food-orange" />
-                  ) : (
-                    <BookmarkOutline className="w-5 h-5 text-food-orange" />
-                  )}
-                </button>
-                
-                <div className="absolute inset-x-4 bottom-4 flex justify-between items-end">
-                  <h3 className="text-xl font-semibold text-white max-w-[60%] leading-tight">
-                    {recipe.title}
-                  </h3>
+              <motion.div
+                key={recipe.id}
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.02,
+                  transition: { duration: 0.2 }
+                }}
+                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl 
+                  transition-all duration-300 relative group"
+              >
+                <div className="relative">
+                  <img 
+                    src={recipe.image} 
+                    alt={recipe.title}
+                    className="w-full h-64 object-cover transition-transform duration-300 
+                      group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent 
+                    opacity-100 group-hover:opacity-90 transition-opacity duration-300" />
                   
-                  <button 
-                    onClick={() => navigate(`/recipe/${recipe.id}`)}
-                    className="px-4 py-1.5 bg-food-orange text-white text-sm font-medium rounded-full
-                      hover:bg-food-orange/90 transform hover:scale-105 transition-all duration-300
-                      shadow-md hover:shadow-lg"
+                  {/* Save Button with hover effect */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (isSaved(recipe.id)) {
+                        removeRecipe(recipe.id);
+                      } else {
+                        saveRecipe({
+                          ...recipe,
+                          missingIngredients: [],
+                          totalCost: recipe.estimatedCost || 0
+                        });
+                      }
+                    }}
+                    className="absolute top-4 right-4 p-2 rounded-full bg-white/90 backdrop-blur-sm 
+                      hover:bg-white transition-all duration-200 hover:scale-110 shadow-md
+                      transform hover:rotate-3"
                   >
-                    View Recipe
+                    {isSaved(recipe.id) ? (
+                      <BookmarkSolid className="w-5 h-5 text-food-orange" />
+                    ) : (
+                      <BookmarkOutline className="w-5 h-5 text-food-orange" />
+                    )}
                   </button>
+                  
+                  <div className="absolute inset-x-4 bottom-4 flex justify-between items-end
+                    transform transition-transform duration-300 group-hover:translate-y-0
+                    group-hover:opacity-100">
+                    <h3 className="text-xl font-semibold text-white max-w-[60%] leading-tight
+                      transform group-hover:scale-105 transition-transform duration-300">
+                      {recipe.title}
+                    </h3>
+                    
+                    <button 
+                      onClick={() => navigate(`/recipe/${recipe.id}`)}
+                      className="px-4 py-1.5 bg-food-orange text-white text-sm font-medium rounded-full
+                        hover:bg-food-orange/90 transform hover:scale-110 transition-all duration-300
+                        shadow-md hover:shadow-lg hover:rotate-1"
+                    >
+                      View Recipe
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
