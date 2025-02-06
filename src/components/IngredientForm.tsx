@@ -5,6 +5,7 @@ import KitchenTools from './KitchenTools';
 import BudgetInput from './BudgetInput';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence as AP } from 'framer-motion';
+import IngredientScanner from './IngredientScanner';
 
 const AnimatePresence = AP as any;
 
@@ -132,6 +133,29 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ onSubmit }) => {
                 transition-all duration-300 text-base placeholder:text-food-brown/40
                 focus-within:shadow-food-orange/5"
             />
+            <div className="mt-4">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">or</span>
+                </div>
+              </div>
+              
+              <div className="mt-4">
+                <IngredientScanner
+                  onIngredientsDetected={(detected) => {
+                    const newIngredients = [...ingredientsList, ...detected];
+                    setIngredientsList(newIngredients);
+                    setIngredients(newIngredients.join(', '));
+                  }}
+                  onError={(error) => {
+                    console.error(error);
+                  }}
+                />
+              </div>
+            </div>
             <button
               type="button"
               onClick={handleNextQuestion}
